@@ -2757,3 +2757,30 @@ in C:\xampp\htdocs\voila\index.php (13)
 2018/11/08 16:56:03 [warning] [application] Failed to set unsafe attribute "gambar" of "Items".
 in C:\xampp\htdocs\voila\protected\controllers\ItemsController.php (290)
 in C:\xampp\htdocs\voila\index.php (13)
+2018/11/20 04:51:15 [error] [exception.CDbException] CDbException: CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php:382
+Stack trace:
+#0 E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php(331): CDbConnection->open()
+#1 E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php(309): CDbConnection->setActive(true)
+#2 E:\xampp\htdocs\parcc\parcc\framework\base\CModule.php(388): CDbConnection->init()
+#3 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(431): CModule->getComponent('db')
+#4 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(615): CApplication->getDb()
+#5 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(2263): CActiveRecord->getDbConnection()
+#6 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(379): CActiveRecordMetaData->__construct(Object(LogAktivitas))
+#7 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(394): CActiveRecord::model('LogAktivitas')
+#8 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(78): CActiveRecord->getMetaData()
+#9 E:\xampp\htdocs\parcc\parcc\protected\components\Controller.php(29): CActiveRecord->__construct()
+#10 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(312): Controller->afterAction(Object(CInlineAction))
+#11 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#12 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#13 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#14 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#15 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#16 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(292): CFilterChain->run()
+#17 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(276): CController->run('login')
+#19 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(135): CWebApplication->runController('site/login')
+#20 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#21 E:\xampp\htdocs\parcc\parcc\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/parcc/parcc/index.php?r=site/login
+---
