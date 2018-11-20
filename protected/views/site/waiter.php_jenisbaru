@@ -1,0 +1,329 @@
+<html>
+<head>
+		<title>
+		POS 35u
+	</title>
+
+	<style type="text/css">
+	*{
+		font-family: arial;
+	}
+	.namapel{
+		margin-top: 20px;
+		height: 30px;
+		width: 300px;
+		border-radius: 8px;
+	}
+	</style>
+	<link href="<?php echo Yii::app()->request->baseUrl; ?>/dist/assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<?php
+	$this->renderPartial("css");
+	$this->renderPartial("js");
+	$this->renderPartial('main');
+	$this->renderPartial('form-auth');
+ ?>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> -->
+        
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/numpad/jquery.numpad.js"></script>
+<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/js/numpad/jquery.numpad.css">
+<!-- <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/js/numpad/bootstrap.min.css"> -->
+
+
+<applet name="jzebra" code="jzebra.PrintApplet.class" archive="jZebra/jzebra/jzebra.jar" width="0" height="0">
+	<param name="printer" value="zebra">
+</applet>
+<div id="full">
+	<div>
+		<img src="<?php echo Yii::app()->baseUrl; ?>/img/delete.ico" class="close-full">		
+	</div>
+</div>
+
+<div id="list-meja">
+	<center>
+	<H2>PILIH MEJA</H2>
+		
+		 <br>
+		<select id="combo-meja" >
+		<?php
+		$meja = Sales::model()->findAll("t.status = 0");
+		$meja = CHtml::listdata($meja,'table','table');
+		// print_r($meja);
+
+		 ?>
+		 	<option>Piih Meja</option>
+			<?php for($x=1;$x<=75;$x++): ?>
+				<?php if (!isset($meja[$x])): ?>
+					<option class="option-pindah"><?php echo $x; ?></option>
+				<?php endif; ?>
+			<?php endfor; ?>
+		<!-- </div> -->
+		<!-- <div class="option-gabung"> -->
+			<?php for($x=1;$x<=75;$x++): ?>
+				<?php if (isset($meja[$x])): ?>
+					<option class="option-gabung"><?php echo $x; ?></option>
+				<?php endif; ?>
+			<?php endfor; ?>
+<!-- </div> -->
+		</select>
+	</center>
+</div>
+<ul id="logout">
+
+	<li>
+	<i style="color:white" class="fa fa-arrows fa-2x" aria-hidden="true"></i>
+
+	<a href="<?php echo Yii::app()->createUrl('site/logout'); ?>"><i style="color:white" class="fa fa-power-off text-red-1 fa-2x"></i></a> 
+	</li>
+	<?php if (Yii::app()->user->getLevel() == 6){ ?>
+			<li><a href="<?php echo Yii::app()->createUrl('sales/index'); ?>"><i style="color:white" class="fa fa-book fa-2x" aria-hidden="true"></i></a> </li>
+	<?php } ?>
+	<?php if (Yii::app()->user->getLevel() == 6){ ?>
+	<?php } else { ?>
+	<li>
+		<?php $user = Yii::app()->user->id; ?>
+
+		<select id="login-waiter" > 
+			<!-- <option>PILIH WAITER</option> -->
+			<?php foreach (Users::model()->findAll("level = 7") as $k ): ?>
+				<option <?php if ($user==$k->username) echo "selected" ?> value="<?php echo $k->username ?>">
+					<?php echo $k->username ?>
+				</option>
+			<?php endforeach ?>
+		</select>
+		<!-- <a href="#">WAITER : <?php echo Yii::app()->user->id ?></a> -->
+
+	</li>
+	<?php } ?>
+		<!-- <li><a  href="<?php echo Yii::app()->createUrl('site/logout') ?>"> | LOGOUT</a></li> -->
+</ul>
+
+<div id="wrapper-menu">
+<div id="container-menu">
+	<div id="isikategori">
+	<?php foreach (Categories::model()->findAll() as $i): ?>
+		<div class="wrap-kategori">
+			<center>
+				<i class="fa fa-cutlery fa-3x" aria-hidden="true"></i>
+
+				<!-- <img class="menu" src="<?php echo Yii::app()->request->baseUrl; ?>/img/folder.png"> -->
+			</center>
+			<div class="menu-name">
+				<p>
+					<?php echo $i->category ?>
+				</p>
+			</div>
+			<div class="open" value="<?php echo $i->id ?>">
+				BUKA
+			</div>
+		</div>
+		<?php endforeach ?>
+	</div>  
+
+	<div class="backtomenu">BACK</div>	
+	<div id="isimenu"> </div>
+
+	
+	<div id="faktur">
+		<h2 class="label-no-meja">No Meja  : </h2>
+		<img src="<?php echo Yii::app()->baseUrl; ?>/img/delete.ico" class="close">
+	
+		<!-- <input  type="button" class="btn" value="cetak" >	 -->
+		<?php 
+		if (Yii::app()->user->getLevel()==7):
+		?>
+		<input  type="button" class="btn kirim " value="SIMPAN" >	
+		<input  type="button" class="btn onucetakulang" status="cetakulang" value="CETAK ULANG" >
+		<input  type="button" class="btn onupdate" status="pindah" value="PINDAH MEJA" >
+		<input  type="button" class="btn onupdate" status="gabung" value="GABUNG MEJA" >
+		<input  type="button" class="btn onhapus" status="gabung" value="HAPUS ISI MEJA" >
+		<?php  else: ?>
+		<input  type="button" class="btn onbayar" status="gabung" value="BAYAR" >
+		<?php endif; ?>
+
+		<h1 class="judul">	</h1>
+		<div class="form">
+			<input type="text" class="cari-menu" placeholder="cari menu" >
+			<button  class="btn btn-cari-menu"><i class="fa fa-search" aria-hidden="true"></i>
+Cari</button>
+		</div>
+		<div class="form">
+			<label>
+				Nama Tamu 
+				<input class="namapel" type="text" id="namapel" placeholder="   atas nama">
+			<label>
+		</div>
+		<br>
+		<style type="text/css">
+		#container-tabel{
+			height: 400px;
+			overflow: auto;
+		}
+		</style>
+		<div id="container-tabel">
+			<table id="items" >
+				<thead > 
+					<tr>
+						<!-- <td>No</td> -->
+						<td>Nama</td>
+						<td>Jumlah</td>
+						<td>permintaan</td>
+						<td align="center">Cetak</td>
+						<td>Hapus</td>
+					</tr>
+				</thead>
+				<tbody></tbody>
+
+			</table>
+		</div>
+		
+	</div>
+</div>
+</div>
+<div id="meja" ></div>
+
+<div id="kasir-bayar">
+<div style="color:black" class="close-kasir-bayar">
+	<img src="<?php echo Yii::app()->request->baseurl; ?>/img/delete.ico">
+</div>
+	<div>
+		<center>
+			<h1 id="head-bayar"></h1>	
+		</center>
+		<fieldset >
+			<legend style="color:red;font-size:15px;">Pembayaran</legend>
+			<div class="wrap-metode-bayar">
+				<table style="50%" id="table-metode">
+					<tr>
+						<td>Metode</td>
+						<td>
+							<select id="metode-kasir">
+								<option value="1"> Cash</option>
+								<option value="2" > EDC BCA</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Voucher/Potongan</td>
+						<td><input type="number" class="touch" value="0" id="potongan" placeholder="Total Bayar"></td>
+					</tr>
+					<tr>
+						<td>Bayar</td>
+						<td><input type="number" value="0" id="masuk-bayar" class="touch" placeholder="Total Bayar"></td>
+					</tr>
+					<tr>
+						<td>Kembali</td>
+						<td><input type="number" value="0" id="masuk-kembali" placeholder="Total Bayar"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button class="btn" type="button" id="simpancetak">Simpan & Cetak</button>
+							<input  type="button" class="btn" id="justcetak"  value="Cetak Bill" >
+		
+							<input class="btn" type="button" id="removeservice" value="Hapus Svc">
+							<input class="btn" type="button" id="removepajak" value="Hapus Pjk">
+							<input class="btn" type="button" id="removepjsvc" value="Hapus Pjk & Svc">
+						</td>
+					</tr>
+				</table>
+				
+			
+
+			</div>
+
+		<div class="wrap-total" style="50%">
+				<table id="table-metode">
+					<tr>
+						<td>Sub Total</td>
+						<td style="width:400px;">
+							<label style="display:none" id="subtotal-kasir-value">0</label>
+							<label id="subtotal-kasir">0</label>
+						</td>
+					</tr>
+					<tr>
+						<td>Pajak</td>
+						<td style="width:400px;">
+							<label style="display:none" id="pajak-kasir-value">0</label>
+							<label id="pajak-kasir">0</label>
+						</td>
+					</tr>
+					<tr>
+						<td>Service</td>
+						<td style="width:300px;">
+							<label style="display:none" id="service-kasir-value">0</label>
+							<label id="service-kasir">0</label>
+						</td>
+					</tr>
+					<tr>
+						<td>Diskon</td>
+						<td style="width:300px;">
+							<label style="display:none" id="diskon-kasir-value">0</label>
+							<label id="diskon-kasir">0</label>
+						</td>
+					</tr>
+					<tr>
+						<td>Potongan</td>
+						<td style="width:300px;">
+							<label style="display:none" id="potongan-kasir-value">0</label>
+							<label id="potongan-kasir">0</label>
+						</td>
+					</tr>
+
+
+					<tr>
+						<td>Total</td>
+						<td style="width:300px;">
+							<label style="display:none" id="total-bayar-kasir-value">0</label>
+							<label id="total-bayar-kasir">0</label>
+						</td>
+					</tr>
+				</table>
+					
+				
+				
+				</table>
+			</div>
+
+		</fieldset>
+
+
+
+		<fieldset>
+			<legend style="color:red" 
+			>Daftar Item</legend>
+		
+		<table id="table-detail-items" style="width:100%"> 
+
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>Nama Menu</th>
+				<th>Harga</th>
+				<th>Pajak</th>
+				<th>Service</th>
+				<th>Jumlah</th>
+				<th>Diskon</th>
+				<th>Permintaan</th>
+				<th>Subtotal</th>
+				<th style="display:none">Subtotal + pjk + svc</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+		<tfoot>
+			<tr >
+				<td style="color:red;font-size:25px;text-align:right" colspan="10" id="bawah-total"></td>
+			</tr>
+		</tfoot>
+		</table>
+		</fieldset>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+</div>
+
+</html>

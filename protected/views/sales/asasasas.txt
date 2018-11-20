@@ -1,0 +1,396 @@
+if (isset($_GET['Sales']['date'])) 
+				$date =  $_GET['Sales']['date'];
+			else
+				$date =  date('Y-m-d');
+				
+				//echo $_GET['Sales']['date'];
+				//get yii user
+				$username = Yii::app()->user->name;
+				$user = Users::model()->find('username=:un',array(':un'=>$username));
+				$user->id;
+				$idk = $user->level; 
+				if($idk=='')
+					$this->redirect(array('site/login'));
+				$data = new Sales;
+				//$date = addcslashes($_GET['Sales']['date'], '%_');
+				
+	            $data->date = $_GET['Sales']['date'];
+	            // $dataProvider = $data->search();
+				
+				if ($idk != 2){ //jika bukan admin
+				
+				$sql  = "select waiter,s.bayar,s.table,inserter, s.id,sum(total_items) as total_items, date,
+				sum(sale_sub_total) sale_sub_total,
+
+				s.sale_tax,s.sale_service, s.sale_discount, 
+				sum(sale_total_cost)  sale_total_cost,
+				u.username inserter 
+				from sales s,  users u
+				where 
+				  
+
+				  
+				date(s.date)='$date' and s.status=1 and inserter = u.id  and inserter = $user->id   group by s.id  ";
+				
+				$dataProvider = new CSqlDataProvider($sql, array(
+					'totalItemCount'=>$count,
+					'sort'=>array(
+					'attributes'=>array(
+					'desc'=>array('s.id'),
+					),
+					),
+					'pagination'=>array(
+					'pageSize'=>100000,
+				),
+				));
+				
+				
+	     //        $summary = Yii::app()->db->createCommand()
+	     //                ->select('sum(((si.item_price*si.quantity_purchased)+(si.item_tax)-(si.item_discount*(si.item_price*si.quantity_purchased)/100)))   
+						// stc, sum(sale_discount) sd , sum(si.item_price*si.quantity_purchased) sst, sum(item_tax) t, sum(sale_service) svc')
+	     //                ->from('sales s, sales_items si, items i')
+	     //                ->where('
+						//   i.id = si.item_id and i.category_id != 4 and 
+				
+						// si.sale_id = s.id and date(s.date)=:date AND s.status=:status and inserter =:ins ', array(':date' => $date, ':status' => 1,"ins"=>$user->id))
+	     //                // ->where('date(date)=:date AND status=:status', array(':date' => $_GET['Sales']['date'], ':status' => 1))
+	     //                // ->where("date='".$_GET['Sales']['date']."'")
+	     //                ->queryRow();
+				}
+				else{
+				
+
+				$sql  = "select waiter,s.bayar,s.table,inserter, s.id,sum(total_items) as total_items, date,
+				sum(sale_sub_total) sale_sub_total,
+
+				s.sale_tax,s.sale_service, s.sale_discount, 
+				sum(sale_total_cost)  sale_total_cost,
+				u.username inserter 
+				from sales s,  users u
+				where 
+				  
+
+				  
+				date(s.date)='$date' and s.status=1 and inserter = u.id     group by s.id  ";
+
+				$dataProvider = new CSqlDataProvider($sql, array(
+					'totalItemCount'=>$count,
+					'sort'=>array(
+					'attributes'=>array(
+					'desc'=>array('s.id'),
+					),
+					),
+					'pagination'=>array(
+					'pageSize'=>100000,
+				),
+				));
+							
+	     //        $summary = Yii::app()->db->createCommand()
+	     //                ->select('sum(((si.item_price*si.quantity_purchased)+(si.item_tax)-(si.item_discount*(si.item_price*si.quantity_purchased)/100)))   
+						// stc, sum(sale_discount) sd , sum(si.item_price*si.quantity_purchased) sst, sum(item_tax) t, sum(sale_service) svc')
+	     //                ->from('sales s, sales_items si,items i')
+	     //                ->where('
+						// i.id = si.item_id and i.category_id != 4 and 
+				
+						// s.id = si.sale_id and date(s.date)=:date AND s.status=:status  ', array(':date' => $date, ':status' => 1))
+	     //                // ->where('date(date)=:date AND status=:status', array(':date' => $_GET['Sales']['date'], ':status' => 1))
+	     //                // ->where("date='".$_GET['Sales']['date']."'")
+	     //                ->queryRow();	
+			}			
+			$tgl = $_GET['Sales']['date'];
+			if(empty($_GET['Sales']['date'])){
+				$tgl = date('Y-m-d');
+			}
+
+
+
+
+
+
+			<?php
+	function getCustomer($data)
+	{
+		if($data == 1){
+			return "Pelanggan";
+		}
+	}
+	
+	function getBarista($data)
+	{
+		if($data == 1){
+			return "Pasir Kaliki";
+		}else if($data == 2){
+			return "Baltos";
+		}else if($data == 3){
+			return "City Link";
+		}else if($data == 4){
+			return "BTC";
+		}
+		// $cabang = Branch::model()->find('branch_name=:bn',array(':bn'=>$data));
+		// return $cabang->id;
+	}
+	
+	function getPaid($data)
+	{
+		if($data == 1){
+			return "Cash";
+		}else if($data == 3){
+			return "BCA";
+		}else if($data == 4){
+			return "Mandiri";
+		}else if($data == 5){
+			return "CIMB Niaga";
+		}else if($data == 12){
+			return "Compl";
+		}else if($data == 99){
+			return "Voucher";
+		}
+
+		
+	}
+	
+	$username = Yii::app()->user->name;
+	$user = Users::model()->find('username=:un',array(':un'=>$username));
+	$idk = $user->level; 
+	$a = true;
+	if($idk < 5)
+	$a = true;
+	else
+	$a = false;
+?>
+
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'sales-grid',
+	'dataProvider'=>$dataProvider,
+	// 'filter'=>$model->search(),
+	'columns'=>array(
+		array(
+			'header'=>'No.',
+			'value'=>'($this->grid->dataProvider->pagination->currentPage*$this->grid->dataProvider->pagination->pageSize) + array_search($data,$this->grid->dataProvider->getData())+1',
+		),
+		array(
+		'name'=>'id',
+		'header'=>'ID'
+		),
+		array(
+		'name'=>'date',
+		'header'=>'Tanggal'
+		),
+		// 'date',
+		array(
+		'name'=>'total_items',
+		'header'=>'Total Menu',
+			'class'=>'ext.gridcolumns.TotalColumn',
+//			'value'=>'$data->nilai',
+			'type'=>'number',
+			'footer'=>true,
+		),	
+		array(
+			'name'=>'sale_sub_total',
+			'header'=>'total kotor',
+			'type'=>'number',
+			'htmlOptions'=>array('style'=>'text-align:right'),
+			'class'=>'ext.gridcolumns.TotalColumn',
+//			'value'=>'$data->nilai',
+			'type'=>'number',
+			'footer'=>true,
+			'htmlOptions'=>array('style'=>'text-align:right'),
+
+		),	
+		array(
+			'name'=>'sale_tax',
+			'header'=>'total pajak',
+			'type'=>'number',
+			'htmlOptions'=>array('style'=>'text-align:right'),
+//			'value'=>'$data->nilai',
+			'class'=>'ext.gridcolumns.TotalColumn',
+			'type'=>'number',
+			'footer'=>true,
+			'htmlOptions'=>array('style'=>'text-align:right'),
+
+		),	
+		array(
+			'name'=>'sale_service',
+			'header'=>'total pelayanan',
+			'type'=>'number',
+			'htmlOptions'=>array('style'=>'text-align:right'),
+			'class'=>'ext.gridcolumns.TotalColumn',
+//			'value'=>'$data->nilai',
+			'type'=>'number',
+			'footer'=>true,
+			'htmlOptions'=>array('style'=>'text-align:right'),
+
+		),	
+		array(
+			'name'=>'sale_discount',
+			'header'=>'total diskon',
+			'type'=>'number',
+			'htmlOptions'=>array('style'=>'text-align:right'),
+			'class'=>'ext.gridcolumns.TotalColumn',
+//			'value'=>'$data->nilai',
+			'type'=>'number',
+			'footer'=>true,
+			'htmlOptions'=>array('style'=>'text-align:right'),
+
+		),
+		
+		array(
+			'name'=>'sale_total_cost',
+			'header'=>'total bersih',
+			'type'=>'number',
+			'htmlOptions'=>array('style'=>'text-align:right'),
+			'class'=>'ext.gridcolumns.TotalColumn',
+//			'value'=>'$data->nilai',
+			'type'=>'number',
+			'footer'=>true,
+			'htmlOptions'=>array('style'=>'text-align:right'),
+
+		),
+		array(
+			'name'=>'inserter',
+			'header'=>'Kasir',
+			'type'=>'number',
+			'htmlOptions'=>array('style'=>'text-align:right'),
+			'class'=>'ext.gridcolumns.TotalColumn',
+			// 'value'=>'$data->user->username',
+			'type'=>'text',
+			'footer'=>true,
+			'htmlOptions'=>array('style'=>'text-align:right'),
+
+		),
+		array(
+			'name'=>'table',
+			'header'=>'Meja',
+		),
+		array(
+			'name'=>'waiter',
+			'header'=>'waiter',
+		)
+		// 'table'
+		,
+		array(
+		'name'=>'bayar',
+
+		'header'=>'bayar',
+		'type'=>'number',		
+		)
+		,
+		//'comment',
+		// 'status',
+		array(
+		'type'=>'raw',
+		'header'=>'Rincian Menu',
+		'value'=>'CHtml::link("Detail",array("sales/detailitems","id"=>$data[id]),array("style"=>"text-decoration:none"))',
+		
+		),
+		array
+		(
+			'name'=>'print',
+			'header'=>'Cetak',
+			'type'=>'raw',
+			// 'value'=>'CHtml::ajaxButton("Cetak", array("sales/CetakReport","id"=>$data->id),array())',
+			'value'=>'CHtml::ajaxButton("Cetak", array("sales/CetakReport"),array(
+																					"data"=>array("id"=>$data[id]),
+																					"success"=>"function(data){
+																						// alert(\'cek\');
+																						var sales = jQuery.parseJSON(data);
+																						if (sales.sale_id!=\'\')
+																						{
+																							print_bayar(sales);
+																						}
+																					}",
+																					"error"=>"function(data){alert(\'data\')}"
+																				))',
+		),	
+		array(
+		'class'=>'CButtonColumn',
+		'template'=>'{delete}',
+		'visible'=>$a,
+		'buttons' => array(
+			
+				'delete' => array(
+							'url'=>'Yii::app()->createUrl("Sales/delete", array("id"=>$data[id]))',      //A PHP expression for generating the URL of the button.
+				
+				),
+			),
+		
+		), 		
+	),
+)); ?>
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+    'id' => 'dialog_export',
+    // additional javascript options for the dialog plugin
+    'options' => array(
+        'title' => 'Meja',
+        'autoOpen' => false,
+        'modal' => true,
+        'width' => 250,
+        'height' => 80,
+    ),
+));
+
+echo "data sales berhasil di export";
+//echo "ramdnai";
+
+$this->endWidget('zii.widgets.jui.CJuiDialog');
+?>
+<script>
+$(document).ready(function(){
+	$('#export').click(function(){
+		var tanggal = $('#Sales_date').val();
+		$.ajax({
+			url:'<?=$this->createUrl('sales/export')?>',
+			data:'tanggal='+tanggal,
+			success: function(data){
+				$("#dialog_export").dialog("open");
+				$("#hasil").html(data);
+				// alert(data);
+			},
+			error: function(data){
+				$("#hasil").html(data);
+				// alert(data);
+				// alert('data gagal di export');
+			}
+		});
+	});
+	
+
+	$('#cetakrekap').click(function(){
+		var tanggal = $('#Sales_date').val();
+		
+		if(tanggal==''){
+			alert('Pilih tanggal terlebih dahulu');
+			return false;
+		}else{
+			$.ajax({
+				url:'<?=$this->createUrl('sales/cetakrekap')?>',
+				data:'tanggal_rekap='+tanggal,
+				success: function(data){
+					// alert(data);
+					var json = jQuery.parseJSON(data);
+					// $('#hasiljson').html(data);
+					print_rekap(json);
+					// console.log(data);
+					
+				},
+				error: function(data){
+					alert('error');
+				}
+			});
+		}
+	});
+});
+</script>
+<div id="hasil">
+</div>
+<applet name="jzebra" code="jzebra.PrintApplet.class" archive="jZebra/jzebra/jzebra.jar" width="0" height="0">
+    <param name="printer" value="zebra">
+</applet>
+<system.webServer>
+    <staticContent>
+      <mimeMap fileExtension=".jnlp" mimeType="application/x-java-jnlp-file" />
+    </staticContent>
+  </system.webServer>
+
+</fieldset>

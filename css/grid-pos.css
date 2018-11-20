@@ -1,0 +1,51 @@
+.content-pos{
+		min-height:250px;
+	}
+	.content-pos-grid{
+		float:left;
+		width:670px;
+	}
+	.content-pos-kanan{
+		float:right;
+		width:245px;
+	}
+	.content-pos-grid, .content-pos-kanan{
+		border:1px solid #ffffff;
+		height:70px;
+	}
+	.pos-kanan-content{
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		min-height:40px;
+		border:1px solid #D5D5D5;
+		/*background:url("../images/bg_right.png");*/
+                background: #ffe694;
+		margin-bottom:20px;
+                padding:1px;
+	}
+	.kanan-footer{
+		height:30px;
+		background-color:#ff8800;
+		-webkit-border-radius:0 0 5px 5px;
+		border-radius: 0 0 5px 5px;
+	}
+	.tb_kanan{
+		margin:0px;
+	}
+	.right{
+		text-align:right;
+                padding: 5px;
+	}
+        .left{
+            padding:5px;
+        }
+	.big-button{
+		/*background:url("../images/bg_button.png");*/
+		/*border:none;*/
+		/*-webkit-border-radius: 52px;
+		border-radius: 5px;*/
+        font-size:20px;
+		height: 72px;
+		width:245px;
+		margin-bottom:5px;
+	}

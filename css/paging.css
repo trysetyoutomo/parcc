@@ -1,0 +1,109 @@
+.grid-view .pager {
+    margin-top: 0;
+    float:right;
+    font-family: 'PT Sans',Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+}
+.grid-view{
+    padding-top:0;
+}
+.summary{
+    float:left;
+    color:#fff;
+    padding-left:5px;
+    margin: 10px 8px 10px 0;
+    font-family: 'PT Sans',Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+}
+ul.yiiPager{
+    float:left;
+    color:#fff;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0, 0, 0, 0.5) inset;
+    margin: 10px 8px 10px 0;
+    padding: 2px;
+}
+.page, .next, .previous, .first, .last{
+    background-color: #444444;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    outline: medium none;
+    padding: 0 10px;
+    text-align: center;
+    text-decoration: none;
+}
+.next{
+    border-right: 0 none;
+}
+.selected{
+    background-image: none;
+    border: medium none;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) inset;
+    background-color: #F47A46;
+}
+.previous{
+    border-left: 0 none;
+    float:left;
+}
+.page a{
+    border:none;
+    color:#fff;
+}
+ul.yiiPager a:link, ul.yiiPager a:visited {
+    border:none;
+}
+ul.yiiPager .selected a {
+    background:none;
+}
+ul.yiiPager a:link, ul.yiiPager a:visited {
+    color:#fff;
+}
+.mws-panel, .grid_6{
+    background-color: #444444;
+}
+.hidden{
+    visibility:visible;
+    pointer-events: none;
+    cursor: default;
+}
+ul.yiiPager li.hidden a{
+    color:#888;
+}
+th a, th a:hover{
+    color:#000;
+    text-decoration: none;
+}
+th{
+    background-image: url('../images/sort.png');
+    background-repeat: no-repeat; 
+    background-position: 10px 12px;
+}
+.button-column{
+    background-image: none;
+}
+.div-search{
+    height:40px;
+    background-color: #CCCCCC;
+    border-left: 2px solid #444444;
+    border-right: 2px solid #444444;
+    text-align: right;
+}
+.btn{
+    float: left;
+    margin:5px 10px 5px 10px;
+}
+.searchtext{
+    float:right;
+    margin:5px 10px 5px 10px;
+}

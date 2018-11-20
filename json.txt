@@ -1,0 +1,64 @@
+{"logo":" Pak Chi Met",
+"alamat":" Jl.Pasir Kaliki no. 78,
+ Bdg",
+"no_telp":" Telp. (022)6042148\/6042147",
+"trx_tgl":" 18 Mar 2013",
+"pembatas":"----------------------------------------",
+"detail":{"gross":"Gross Sales\tDisc\tNet Sales",
+"grossvalue":"\r\n9,993,572\t10\t9,993,562\r\n"},
+
+"detail2":[
+{"dept":"DEPT: CONDIMENT\r\n",
+"pembatas":"----------------------------------------",
+"table":"- CAH KANGKUNG\r\n\t1 Item 15,000\r\n"},
+
+{"dept":"",
+"pembatas":"",
+"table":"- NASI PUTIH\r\n\t1 Item 4,000\r\n"},
+
+{"dept":"DEPT: GURAME\r\n",
+"pembatas":"----------------------------------------",
+"table":"- PAKET GURAME BAKAR\r\n\t2 Item 80,
+000\r\n"},
+
+{"dept":"DEPT: KUWE\r\n",
+"pembatas":"----------------------------------------",
+"table":"- PAKET KUWE BAKAR\r\n\t1 Item 27,500\r\n"},
+{"dept":"",
+"pembatas":"",
+"table":"- PAKET ULAM KUWE\r\n\t1 Item 60,000\r\n"},
+
+{"dept":"DEPT: PAKET AYAM\r\n",
+"pembatas":"----------------------------------------",
+"table":"- PAKET AYAM BAKAR\r\n\t2 Item 40,900\r\n"},
+{"dept":"",
+"pembatas":"",
+"table":"- PAKET AYAM LENGKAP\r\n\t11 Item 440,000\r\n"},
+{"dept":"",
+"pembatas":"",
+"table":"- PAKET AYAM COBEK\r\n\t1 Item 22,725\r\n"},
+
+{"dept":"DEPT: PAKET BAWAL\r\n",
+"pembatas":"----------------------------------------",
+"table":"- PAKET BAWAL BAKAR\r\n\t1 Item 40,000\r\n"},
+{"dept":"",
+"pembatas":"",
+"table":"- PAKET BAWAL LENGKAP\r\n\t2 Item 100,000\r\n"},
+
+{"dept":"DEPT: SOFTDRINK\r\n",
+"pembatas":"----------------------------------------",
+"table":"- TEH BOTOL\r\n\t1 Item 4,000\r\n"},
+
+{"dept":"",
+"pembatas":"",
+"table":"- FRESHTEA\r\n\t2 Item 8,000\r\n"},
+
+{"dept":"",
+"pembatas":"",
+"table":"- FRUITEA\r\n\t1 Item 4,000\r\n"}
+
+],
+"total":"\t27 ITEMS\t\t846,125\r\n",
+
+"footer":" Jagonya Ikan Bakar\r\n",
+"footer2":" (c) Pak Chi Met - 2012\r\n"}
