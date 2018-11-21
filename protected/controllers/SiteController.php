@@ -23,7 +23,7 @@ class SiteController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('laporanpenjualan','setpajak','index','table','waiter'),
+				'actions'=>array('laporanpenjualan','setpajak','index','table','waiter','salon'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -541,6 +541,11 @@ class SiteController extends Controller
 		// echo "masuk";
 		$this->renderPartial('waiter');
 	}
+	public function actionSalon(){
+		// $this->layout = "waiter";
+		// echo "masuk";
+		$this->renderPartial('salon');
+	}
 	public function actionWaiterkirim(){
 			date_default_timezone_set("Asia/Jakarta"); 
 			$nilai = $_REQUEST['jsonObj'];
@@ -871,6 +876,8 @@ class SiteController extends Controller
 					$this->redirect(array('site/index'));
 				if ($level==7)
 					$this->redirect(array('site/waiter'));
+				if ($level==9)
+					$this->redirect(array('site/salon'));
 				if ($level==99)
 					$this->redirect(array('site/laporanpenjualan'));
 			}

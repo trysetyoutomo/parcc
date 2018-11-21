@@ -22,8 +22,26 @@
 					?>
 					<li class="sheet-meja" <?php if ($z==1) echo "style='background:red'" ?> val="<?php echo $z ?>"><?php echo $ket; ?></li><!--Area--> 
 				<?php endfor; ?>
-			<?php }else{
-
+			<?php } else if (Yii::app()->user->getLevel() == 9) {
+				$sheet = 1;
+				for($z=1;$z<=$sheet;$z++): ?>
+					<?php
+						// if($z==1){
+						// 	$ket = "Cafe";
+						// }elseif($z==2){
+						// 	$ket = "Take Away";
+						// }elseif($z==3){
+						// 	$ket = "Owner";
+						// }elseif($z==4){
+						// 	$ket = "Cowork";
+						// }else
+						if($z==1){
+							$ket = "Salon";
+						}
+					?>
+					<li class="sheet-meja" <?php if ($z==1) echo "style='background:red'" ?> val="<?php echo $z ?>"><?php echo $ket; ?></li><!--Area--> 
+				<?php endfor; ?> 
+			<?php } else { 
 				$sheet = 3;
 				for($z=1;$z<=$sheet;$z++): ?>
 					<?php
@@ -41,8 +59,8 @@
 						// }
 					?>
 					<li class="sheet-meja" <?php if ($z==1) echo "style='background:red'" ?> val="<?php echo $z ?>"><?php echo $ket; ?></li><!--Area--> 
-				<?php endfor; 
-				} ?>
+				<?php endfor; ?> 
+			<?php } ?>
 		</ul>
 	</center>
 	<!-- <center> -->
@@ -84,6 +102,11 @@
 					$a1 = 61;
 					$a2 = 80;
 				}elseif($z==5){
+					$a1 = 81;
+					$a2 = 90;
+				}
+			}else if(Yii::app()->user->getLevel() == 9){
+				if($z==1){
 					$a1 = 81;
 					$a2 = 90;
 				}
