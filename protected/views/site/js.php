@@ -2,7 +2,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 	var default_sheet = 1;
-
 	var username = "<?php echo Yii::app()->user->id; ?>"
 	function reloadmeja(){
 	    $.ajax({
@@ -14,35 +13,18 @@
 				setSheet(default_sheet);
 	        }
 	    });
-	    // $('#wrapper-menu').hide();
-	    // var waktu = setTimeout("reloadmeja()",3000);
 	}
 
-
-
-	// function reloadOptionMeja(){
-
-	// }
-
-
 		reloadmeja();
-
 		setInterval(function(){
-			 reloadmeja(); 
-			 // alert("masuj");
+			 // reloadmeja(); 
 		}, 1000);
-
 
 		var meja;
 		var meja_tipe = "null";
 		var status = "insert";
 		var status_meja = '';
 
-
-
-
-		// function kirim(){
-	// $('#isimenu').html(" ");
 	$("#combo-meja").click(function(e){
 		// alert(status_meja);
 		if (status_meja=='pindah'){
@@ -128,6 +110,7 @@
 
 	$(".kirim").click(function(e){
 		// alert(cetakbardapur());
+		// alert("TEST");
 		if (!cetakbardapur(meja,meja_tipe)){
 			exit;
 
@@ -156,12 +139,14 @@
 		// alert(JSON.stringify(head));
 		// alert		
 			$(".baris").each(function() {
-			var idb = $(this).find('.pk').html();
+				var idb = $(this).find('.pk').html();
 				var jml = $(this).find('.jumlah').find('.input-jumlah').val();
+				var cetak = $(this).find('.pk').attr('cetak');
 				var permintaan = $(this).find('.permintaan').find('.area-permintaan').val();
 				item = {}
 					item["idb"] = idb;
 					item["jml"] = jml;
+					item["cetak"] = cetak;
 					item["permintaan"] = permintaan;
 				jsonObj.push(item);
 			});
@@ -190,7 +175,8 @@
 					// alert('haha');
 				},
 				error:function(result){
-					alert(JSON.stringify(result));
+					// console.log(result);
+					// alert(JSON.stringify(result));
 					alert('data tidak boleh kosong');
 				}
 			});
@@ -204,13 +190,14 @@
 		$(document).on("click",".hapus",function(e){	
 			public_index = $('.hapus').index(this);
 			var cek = $('.baris').eq(public_index).find(".pk").attr("cetak");
+			var siid = $('.baris').eq(public_index).find(".pk").attr("siid");
 			// // alert(cek);
 			if (cek==0){
 				$('.baris').eq(public_index).remove();			
 			}else{
 				$("#fullscreen").fadeIn();	
-				$("#form-auth").fadeIn();	
-				
+				$("#form-auth").fadeIn();
+				$("#siid").val(siid);
 			}
 			// 	var password = prompt("masukan password supervisor ! ");
 			// 	if (password=="superbani"){

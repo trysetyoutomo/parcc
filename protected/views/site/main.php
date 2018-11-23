@@ -1146,19 +1146,19 @@ function cetakbardapur(meja,meja_tipe){
 	     	}
 
 		});
-	    if (dapur==true){		
-			 if (print_items("POS-80C dapur",2)){
-				 alert('PERMINTAAN TELAH TERKIRIM KE DAPUR');				// alert('dapur true');
-				 // return true;
-			 }
-		}
+	 //    if (dapur==true){		
+		// 	 if (print_items("POS-80C dapur",2)){
+		// 		 alert('PERMINTAAN TELAH TERKIRIM KE DAPUR');				// alert('dapur true');
+		// 		 // return true;
+		// 	 }
+		// }
 
-	    if (bar==true){		
-			if (print_items("POS-80C",1)){
-			    alert('PERMINTAAN TELAH TERKIRIM KE BAR');
-			    // return true;
-			}
-	    }
+	 //    if (bar==true){		
+		// 	if (print_items("POS-80C",1)){
+		// 	    alert('PERMINTAAN TELAH TERKIRIM KE BAR');
+		// 	    // return true;
+		// 	}
+	 //    }
 
 	    return true;
     }else{

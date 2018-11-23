@@ -1420,11 +1420,46 @@ public function actionCetakReportAll(){
 							// 'pageSize'=>100,
 						// ),
 		//));
+
+			$tot_salon = Yii::app()->db->createCommand()
+			->select("
+				date(date) tgl,
+				sum(si.item_price*si.quantity_purchased) sst,
+				sum(si.item_tax) tax,
+				sum(si.item_service) service , 
+				sum( si.item_discount/100 * ($subtotal) )  sd,
+
+				sum(
+					(
+						(si.item_price*si.quantity_purchased)
+						+
+						(si.item_tax)
+						+
+						(si.item_service)
+						-
+						(si.item_discount*($subtotal)/100))
+
+					) stt
+				
+
+					")
+			->from("sales s, sales_items si,items i")
+			->where(" i.id = si.item_id and month(date) =  '$month' and year(date)='$year'  and s.status=1  and s.id = si.sale_id and s.`table` between 81 and 90")
+			->group('date(s.date)')
+			->order('date(s.date) asc')
+			->queryAll();
+			
+			// $tot = new CArrayDataProvider($tot,array(
+			// 'pagination'=>array(
+							// 'pageSize'=>100,
+						// ),
+		//));
 			
 			
 			$this->render('monthlysum',array(
 				'model'=>$model,
 				'tot'=>$tot,
+				'tot_salon'=>$tot_salon,
 				'month'=>$month,
 				'year'=>$year,
 			));
@@ -1888,6 +1923,15 @@ public function actionSalesoutletweekly(){
         // echo "<pre>";
         // print_r($data['si']);
         // echo "</pre>";
+
+        // =================================================================================================================================
+        // $msg =  "[{$query}]".mysql_error($this->Conn);
+		$author = Yii::app()->user->id;
+		$ip_addrs = $_SERVER['REMOTE_ADDR'];
+        $msg =  "[{$author} ({$ip_addrs}) | kasir load bill {$id}]";
+        $log  = "Scc [".date("Y-m-d H:i:s")." / SalesController(1896)(actionLoad)]: ".$msg.PHP_EOL;
+        file_put_contents('logs/log_site_'.$author.'_'.date("Y-m-d").'.txt', $log, FILE_APPEND);
+        // =================================================================================================================================
         echo CJSON::encode($data);
     }
 	

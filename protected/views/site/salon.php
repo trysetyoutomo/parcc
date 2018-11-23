@@ -75,7 +75,7 @@
 
 		<select id="login-waiter" > 
 			<!-- <option>PILIH WAITER</option> -->
-			<?php foreach (Users::model()->findAll("level = 7") as $k ): ?>
+			<?php foreach (Users::model()->findAll("level = 9") as $k ): ?>
 				<option <?php if ($user==$k->username) echo "selected" ?> value="<?php echo $k->username ?>">
 					<?php echo $k->name ?>
 				</option>

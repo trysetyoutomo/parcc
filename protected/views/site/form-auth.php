@@ -44,6 +44,7 @@
 	<br>
 	
 	Password <input type="password" name="password" required>
+	<input id="siid" type="hidden" name="siid">
 	<input type="submit" value="Login">
 
    <?php $this->endWidget(); ?>

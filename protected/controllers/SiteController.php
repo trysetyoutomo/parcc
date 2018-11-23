@@ -496,6 +496,14 @@ class SiteController extends Controller
 		foreach ($sales_lamaitems as $sli) {
 			$sli->sale_id = $id_sales_baru;
 			$sli->update();
+            // =================================================================================================================================
+            // $msg =  "[{$query}]".mysql_error($this->Conn);
+			$author = Yii::app()->user->id;
+			$ip_addrs = $_SERVER['REMOTE_ADDR'];
+            $msg =  "[{$author} ({$ip_addrs}) | Gabung meja dari {$mjl} ke {$mjb}]";
+            $log  = "Scc [".date("Y-m-d H:i:s")." / SiteController(503)(actionGabungmeja)]: ".$msg.PHP_EOL;
+            file_put_contents('logs/log_site_'.$author.'_'.date("Y-m-d").'.txt', $log, FILE_APPEND);
+            // =================================================================================================================================
 		}
 		$model = Sales::model()->find("t.table = '$mjl' and status = 0");
 		if ($model->delete()){
@@ -530,6 +538,14 @@ class SiteController extends Controller
 		$sales = Sales::model()->find("t.table = '$mjl' and status = 0");
 		$sales->table = $mjb;
 		if ($sales->update())
+            // =================================================================================================================================
+            // $msg =  "[{$query}]".mysql_error($this->Conn);
+			$author = Yii::app()->user->id;
+			$ip_addrs = $_SERVER['REMOTE_ADDR'];
+            $msg =  "[{$author} ({$ip_addrs}) | Pindah meja dari {$mjl} ke {$mjb}]";
+            $log  = "Scc [".date("Y-m-d H:i:s")." / SiteController(538)(actionUpdatetable)]: ".$msg.PHP_EOL;
+            file_put_contents('logs/log_site_'.$author.'_'.date("Y-m-d").'.txt', $log, FILE_APPEND);
+            // =================================================================================================================================
 			echo "meja telah terpindahkan";
 
 	}
@@ -599,37 +615,52 @@ class SiteController extends Controller
 
 				// if (
 				// echo $modelh->nama;
-				SalesItems::model()->deleteAll("sale_id = '$modelh->id' ");
+
+				#di comment karena skrng yang insert hanya yang statusnya cetak = 0 jadi tidak usah lagi menghapus isi sales item yang sebelumnya
+				// SalesItems::model()->deleteAll("sale_id = '$modelh->id' ");
 
 				foreach ($nilai as $n){
-					$model = new SalesItems;
-					$model->item_id = $n['idb'];
-					
-					$items = Items::model()->findByPk($n['idb']);
+					if ($n['cetak'] == "0") {
+						# insert ke table sales item yang cetak sama dengan 0 atau belum di cetak
+		                // =================================================================================================================================
+		                // $msg =  "[{$query}]".mysql_error($this->Conn);
+						$author = Yii::app()->user->id;
+						$ip_addrs = $_SERVER['REMOTE_ADDR'];
+		                $msg =  "[{$author} ({$ip_addrs}) | add {$n['idb']} to {$modelh->id}]";
+		                $log  = "Scc [".date("Y-m-d H:i:s")." / SiteController(607)(actionWaiterkirim)]: ".$msg.PHP_EOL;
+		                file_put_contents('logs/log_site_'.$author.'_'.date("Y-m-d").'.txt', $log, FILE_APPEND);
+		                // =================================================================================================================================
+						$model = new SalesItems;
+						$model->item_id = $n['idb'];
+						
+						$items = Items::model()->findByPk($n['idb']);
 
-					$model->quantity_purchased = $n['jml'];
-					$model->item_tax = ($items->unit_price*$n['jml']) * $pajak ;
-					$model->item_service = ($items->unit_price*$n['jml']) * $service ;
-					$model->item_price = $items->unit_price;
-					$model->item_discount = 0;
-					$model->cetak = 1;
-					$model->item_total_cost =  ($items->unit_price * $n['jml']) + ( ($items->unit_price*$n['jml']) * $pajak ) + (($items->unit_price*$n['jml']) * $service)  ;
-					$model->permintaan = $n['permintaan'];
-					// $model->harga = Barang::model()->findByPk($n['idb'])->harga;
-					$model->sale_id = $modelh->id;
-					if ($model->save()){
-						echo "sukses bro";
-						// $barang = Barang::model()->findByPk($n['idb']);
-						// $barang->stok = $barang->stok + $n['jml'];
-						// if ($barang->save()){
-						// 	echo "sukses update ";
-						// }
-					}
-					else{
-						echo "<pre>";
-						print_r($model->getErrors());
-						echo "</pre>";
-						// echo "gagal bro";			
+						$model->quantity_purchased = $n['jml'];
+						$model->item_tax = ($items->unit_price*$n['jml']) * $pajak ;
+						$model->item_service = ($items->unit_price*$n['jml']) * $service ;
+						$model->item_price = $items->unit_price;
+						$model->item_discount = 0;
+						$model->cetak = 1;
+						$model->item_total_cost =  ($items->unit_price * $n['jml']) + ( ($items->unit_price*$n['jml']) * $pajak ) + (($items->unit_price*$n['jml']) * $service)  ;
+						$model->permintaan = $n['permintaan'];
+						$model->author_add = $author;
+						$model->datetime_add = date("Y-m-d H:i:s");
+						// $model->harga = Barang::model()->findByPk($n['idb'])->harga;
+						$model->sale_id = $modelh->id;
+						if ($model->save()){
+							echo "sukses bro";
+							// $barang = Barang::model()->findByPk($n['idb']);
+							// $barang->stok = $barang->stok + $n['jml'];
+							// if ($barang->save()){
+							// 	echo "sukses update ";
+							// }
+						}
+						else{
+							echo "<pre>";
+							print_r($model->getErrors());
+							echo "</pre>";
+							// echo "gagal bro";			
+						}
 					}
 				}
 
@@ -708,6 +739,14 @@ class SiteController extends Controller
 					// $model->harga = Barang::model()->findByPk($n['idb'])->harga;
 					$model->sale_id = $modelh->id;
 					if ($model->save()){
+			            // =================================================================================================================================
+			            // $msg =  "[{$query}]".mysql_error($this->Conn);
+						$author = Yii::app()->user->id;
+						$ip_addrs = $_SERVER['REMOTE_ADDR'];
+			            $msg =  "[{$author} ({$ip_addrs}) | Hapus isi meja table {$_REQUEST['head']['meja']}]";
+			            $log  = "Scc [".date("Y-m-d H:i:s")." / SiteController(742)(actionWaiterhapus)]: ".$msg.PHP_EOL;
+			            file_put_contents('logs/log_site_'.$author.'_'.date("Y-m-d").'.txt', $log, FILE_APPEND);
+			            // =================================================================================================================================
 						echo "sukses bro";
 						// $barang = Barang::model()->findByPk($n['idb']);
 						// $barang->stok = $barang->stok + $n['jml'];
@@ -737,6 +776,8 @@ class SiteController extends Controller
 		if (isset($_REQUEST['username'])) {
 			$un = $_REQUEST['username'];
 			$pass = $_REQUEST['password'];
+			$siid = $_REQUEST['siid'];
+			$ip_addrs = $_SERVER['REMOTE_ADDR'];
 			//cari dari database yg usename & passwordnya dikirim
 			$user = Users::model()->find("username=:un AND  password=:pass",array(":un"=>$un, ":pass"=>$pass));
 			$userLevel = $user['level'];
@@ -749,8 +790,37 @@ class SiteController extends Controller
 					$m->controller = 'site';
 					$m->action = 'hmppos';
 					$m->tanggal_akses = date("Y-m-d h:i:s");
-					$m->save();
-					echo "authorized";
+					if ($m->save()) {
+						$modelsalesitem = SalesItems::model()->findByPk($siid);
+						$sih = new SalesItemsHapus;
+						$sih->siid = $modelsalesitem->id;
+						$sih->sale_id = $modelsalesitem->sale_id;
+						$sih->item_id = $modelsalesitem->item_id;
+						$sih->quantity_purchased = $modelsalesitem->quantity_purchased;
+						$sih->item_tax = $modelsalesitem->item_tax;
+						$sih->item_price = $modelsalesitem->item_price;
+						$sih->item_discount = $modelsalesitem->item_discount;
+						$sih->item_total_cost = $modelsalesitem->item_total_cost;
+						$sih->item_service = $modelsalesitem->item_service;
+						$sih->author_add = $un;
+						$sih->datetime_add = date("Y-m-d H:i:s");
+						if ($sih->save()) {
+			                // =================================================================================================================================
+			                // $msg =  "[{$query}]".mysql_error($this->Conn);
+			                $msg =  "[{$un} ({$ip_addrs}) | add sih {$siid}]";
+			                $log  = "Scc [".date("Y-m-d H:i:s")." / SiteController(811)(actionUservoid)]: ".$msg.PHP_EOL;
+			                file_put_contents('logs/log_site_'.$un.'_'.date("Y-m-d").'.txt', $log, FILE_APPEND);
+			                // =================================================================================================================================
+							$modelsalesitem->delete();
+			                // =================================================================================================================================
+			                // $msg =  "[{$query}]".mysql_error($this->Conn);
+			                $msg =  "[{$un} ({$ip_addrs}) | delete item {$siid}]";
+			                $log  = "Scc [".date("Y-m-d H:i:s")." / SiteController(818)(actionUservoid)]: ".$msg.PHP_EOL;
+			                file_put_contents('logs/log_site_'.$un.'_'.date("Y-m-d").'.txt', $log, FILE_APPEND);
+			                // =================================================================================================================================
+						}
+						echo "authorized";
+					}
 				}else{
 					echo "unauthorized";
 				}
