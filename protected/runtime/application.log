@@ -2784,3 +2784,136 @@ Stack trace:
 #22 {main}
 REQUEST_URI=/parcc/parcc/index.php?r=site/login
 ---
+2018/11/23 05:13:54 [error] [exception.CDbException] CDbException: CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php:382
+Stack trace:
+#0 E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php(331): CDbConnection->open()
+#1 E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php(309): CDbConnection->setActive(true)
+#2 E:\xampp\htdocs\parcc\parcc\framework\base\CModule.php(388): CDbConnection->init()
+#3 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(431): CModule->getComponent('db')
+#4 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(615): CApplication->getDb()
+#5 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(2263): CActiveRecord->getDbConnection()
+#6 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(379): CActiveRecordMetaData->__construct(Object(LogAktivitas))
+#7 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(394): CActiveRecord::model('LogAktivitas')
+#8 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(78): CActiveRecord->getMetaData()
+#9 E:\xampp\htdocs\parcc\parcc\protected\components\Controller.php(29): CActiveRecord->__construct()
+#10 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(312): Controller->afterAction(Object(CInlineAction))
+#11 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#12 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#13 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#14 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#15 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#16 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(292): CFilterChain->run()
+#17 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(276): CController->run('login')
+#19 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(135): CWebApplication->runController('site/login')
+#20 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#21 E:\xampp\htdocs\parcc\parcc\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/parcc/parcc/index.php?r=site/login
+HTTP_REFERER=http://localhost/parcc/
+---
+2018/11/23 08:22:33 [error] [exception.CDbException] CDbException: CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php:382
+Stack trace:
+#0 E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php(331): CDbConnection->open()
+#1 E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php(309): CDbConnection->setActive(true)
+#2 E:\xampp\htdocs\parcc\parcc\framework\base\CModule.php(388): CDbConnection->init()
+#3 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(431): CModule->getComponent('db')
+#4 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(615): CApplication->getDb()
+#5 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(2263): CActiveRecord->getDbConnection()
+#6 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(379): CActiveRecordMetaData->__construct(Object(LogAktivitas))
+#7 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(394): CActiveRecord::model('LogAktivitas')
+#8 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(78): CActiveRecord->getMetaData()
+#9 E:\xampp\htdocs\parcc\parcc\protected\components\Controller.php(29): CActiveRecord->__construct()
+#10 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(312): Controller->afterAction(Object(CInlineAction))
+#11 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#12 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#13 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#14 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#15 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#16 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(292): CFilterChain->run()
+#17 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(276): CController->run('login')
+#19 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(135): CWebApplication->runController('site/login')
+#20 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#21 E:\xampp\htdocs\parcc\parcc\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/parcc/parcc/index.php?r=site/login
+---
+2018/11/23 08:46:13 [error] [exception.CDbException] CDbException: CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php:382
+Stack trace:
+#0 E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php(331): CDbConnection->open()
+#1 E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php(309): CDbConnection->setActive(true)
+#2 E:\xampp\htdocs\parcc\parcc\framework\base\CModule.php(388): CDbConnection->init()
+#3 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(431): CModule->getComponent('db')
+#4 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(615): CApplication->getDb()
+#5 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(2263): CActiveRecord->getDbConnection()
+#6 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(379): CActiveRecordMetaData->__construct(Object(LogAktivitas))
+#7 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(394): CActiveRecord::model('LogAktivitas')
+#8 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(78): CActiveRecord->getMetaData()
+#9 E:\xampp\htdocs\parcc\parcc\protected\components\Controller.php(29): CActiveRecord->__construct()
+#10 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(312): Controller->afterAction(Object(CInlineAction))
+#11 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#12 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#13 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#14 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#15 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#16 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(292): CFilterChain->run()
+#17 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(276): CController->run('login')
+#19 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(135): CWebApplication->runController('site/login')
+#20 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#21 E:\xampp\htdocs\parcc\parcc\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/parcc/parcc/index.php?r=site/login
+---
+2018/11/23 08:46:59 [error] [exception.CDbException] CDbException: CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1049] Unknown database 'voila' in E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php:382
+Stack trace:
+#0 E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php(331): CDbConnection->open()
+#1 E:\xampp\htdocs\parcc\parcc\framework\db\CDbConnection.php(309): CDbConnection->setActive(true)
+#2 E:\xampp\htdocs\parcc\parcc\framework\base\CModule.php(388): CDbConnection->init()
+#3 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(431): CModule->getComponent('db')
+#4 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(615): CApplication->getDb()
+#5 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(2263): CActiveRecord->getDbConnection()
+#6 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(379): CActiveRecordMetaData->__construct(Object(LogAktivitas))
+#7 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(394): CActiveRecord::model('LogAktivitas')
+#8 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(78): CActiveRecord->getMetaData()
+#9 E:\xampp\htdocs\parcc\parcc\protected\components\Controller.php(29): CActiveRecord->__construct()
+#10 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(312): Controller->afterAction(Object(CInlineAction))
+#11 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#12 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#13 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#14 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#15 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#16 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(292): CFilterChain->run()
+#17 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(276): CController->run('login')
+#19 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(135): CWebApplication->runController('site/login')
+#20 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#21 E:\xampp\htdocs\parcc\parcc\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/parcc/parcc/index.php?r=site/login
+---
+2018/11/23 08:48:32 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'parcc.log_aktivitas' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `log_aktivitas`.
+in E:\xampp\htdocs\parcc\parcc\protected\components\Controller.php (29)
+in E:\xampp\htdocs\parcc\parcc\index.php (13)
+2018/11/23 08:48:32 [error] [exception.CDbException] CDbException: The table "log_aktivitas" for active record class "LogAktivitas" cannot be found in the database. in E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php:2264
+Stack trace:
+#0 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(379): CActiveRecordMetaData->__construct(Object(LogAktivitas))
+#1 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(394): CActiveRecord::model('LogAktivitas')
+#2 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(78): CActiveRecord->getMetaData()
+#3 E:\xampp\htdocs\parcc\parcc\protected\components\Controller.php(29): CActiveRecord->__construct()
+#4 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(312): Controller->afterAction(Object(CInlineAction))
+#5 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#7 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#8 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#9 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(292): CFilterChain->run()
+#11 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(276): CController->run('login')
+#13 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(135): CWebApplication->runController('site/login')
+#14 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#15 E:\xampp\htdocs\parcc\parcc\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/parcc/parcc/index.php?r=site/login
+---

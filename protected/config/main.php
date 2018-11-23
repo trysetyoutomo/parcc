@@ -65,11 +65,11 @@ return array(
         // uncomment the following to use a MySQL database
 
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=voila',
+            'connectionString' => 'mysql:host=localhost;dbname=parcc',
             'emulatePrepare' => true,
             'username' => 'root',
             // 'password' => 'Passw0rD',
-            'password' => 'handmade',
+            'password' => '',
             'charset' => 'utf8',
         ),
         'errorHandler' => array(
