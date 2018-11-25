@@ -74,7 +74,7 @@ $data2 = CHtml::listData($nilai2,'kode_outlet','nama_outlet');
 <!--
             <p class="note">Fields with <span class="required">*</span> are required.</p>
 -->
-            <?php// echo $form->errorSummary($model); ?>
+            <?php // echo $form->errorSummary($model); ?>
 				<table style="border:1px;width:auto">
 				<tr>
 				<td><label>KATEGORI MENU</label></td>
@@ -110,7 +110,12 @@ $data2 = CHtml::listData($nilai2,'kode_outlet','nama_outlet');
 				
                 <tr>
 					<td><?php echo $form->labelEx($model,'lokasi'); ?></td>
-	                <td><?php echo $form->dropDownList($model,'lokasi',array('1'=>'Bar','2'=>'Dapur')); ?></td>
+	                <td><?php echo $form->dropDownList($model,'lokasi',
+	                array(
+	                	'1'=>'Bar',
+	                	'2'=>'Dapur',
+	                	'3'=>'Salon'
+	                	)); ?></td>
 	                <td><?php echo $form->error($model,'lokasi'); ?></td>
                 </tr>
                  <tr style="display:none">

@@ -173,7 +173,7 @@
                     <li><a href="#">Items</a></li>
                     <li><a href="#">Sales</a></li>
                 </ul-->
-				<?
+				<?php
 				$userlevel = Yii::app()->user->getLevel();
 
 				// echo "hahahahaha".$userlevel;
@@ -199,27 +199,6 @@
                   ), 
                 ),
 
-                // array('label'=>'Pendapatan Periode', 'visible' => $userlevel==3 || $userlevel==2  || $userlevel==1,
-                //   'items'=>array( 
-                //     array('label'=>'Penjualan', 'url'=>array('/sales/periode')), 
-                //     // array('label'=>'Pembayaran','url'=>array('/sales/cashreport')), 
-                //     // array('label'=>'Outlet & Tenant','url'=>array('/sales/outletreport')), 
-                //     // array('label'=>'Penjualan Paket','url'=>array('/paket/index')), 
-                //   ), 
-                // ),  
-                
-            //  array('label'=>'Laporan Periode','url'=>array('/sales/salesmonthly'), 'visible' => !Yii::app()->user->isGuest,
-             //   ), 
-                
-                
-                // array('label'=>'Pendapatan Mingguan', 'visible' => $userlevel==3 || $userlevel==2  || $userlevel==1 ,
-                //   'items'=>array( 
-                //     array('label'=>'Penjualan', 'url'=>array('/sales/salesweekly')), 
-                //     array('label'=>'Pembayaran', 'url'=>array('/sales/salescashweekly')), 
-                //     // array('label'=>'Outlet & Tenant','url'=>array('/sales/salesoutletweekly')), 
-                //     // array('label'=>'Penjualan Paket','url'=>array('/sales/salesoutletweekly')), 
-                //     ), 
-                //   ),
                 
                   
                 array('label'=>'Laporan Bulanan', 'visible' => $userlevel==3 || $userlevel==2  || $userlevel==1|| $userlevel==4,
@@ -281,7 +260,7 @@
                  
             ), 
     )); ?> 
-	<?
+	<?php
 				/*
                 $this->widget('zii.widgets.CMenu', array(
                     'items' => array(

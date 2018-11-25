@@ -2917,3 +2917,86 @@ Stack trace:
 #16 {main}
 REQUEST_URI=/parcc/parcc/index.php?r=site/login
 ---
+2018/11/24 18:42:11 [error] [exception.ParseError] ParseError: syntax error, unexpected '/', expecting ')' in E:\xampp\htdocs\parcc\parcc\protected\views\layouts\main2.php:202
+Stack trace:
+#0 E:\xampp\htdocs\parcc\parcc\framework\web\CBaseController.php(96): CBaseController->renderInternal('E:\\xampp\\htdocs...', Array, true)
+#1 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(785): CBaseController->renderFile('E:\\xampp\\htdocs...', Array, true)
+#2 E:\xampp\htdocs\parcc\parcc\protected\controllers\SalesController.php(3286): CController->render('index', Array)
+#3 E:\xampp\htdocs\parcc\parcc\framework\web\actions\CInlineAction.php(50): SalesController->actionIndex()
+#4 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#5 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#7 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#8 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#9 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(292): CFilterChain->run()
+#11 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(276): CController->run('index')
+#13 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(135): CWebApplication->runController('sales/index')
+#14 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#15 E:\xampp\htdocs\parcc\parcc\index.php(14): CApplication->run()
+#16 {main}
+REQUEST_URI=/parcc/parcc/index.php?r=sales/index
+HTTP_REFERER=http://localhost/parcc/parcc/index.php?r=sales/index
+---
+2018/11/24 18:53:12 [error] [exception.CException] CException: Property "SalesItems.author_add" is not defined. in E:\xampp\htdocs\parcc\parcc\framework\base\CComponent.php:174
+Stack trace:
+#0 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(160): CComponent->__set('author_add', 'try')
+#1 E:\xampp\htdocs\parcc\parcc\protected\controllers\SiteController.php(646): CActiveRecord->__set('author_add', 'try')
+#2 E:\xampp\htdocs\parcc\parcc\framework\web\actions\CInlineAction.php(50): SiteController->actionWaiterkirim()
+#3 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#4 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#6 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#7 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(292): CFilterChain->run()
+#10 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(276): CController->run('waiterkirim')
+#12 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(135): CWebApplication->runController('site/waiterkiri...')
+#13 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#14 E:\xampp\htdocs\parcc\parcc\index.php(14): CApplication->run()
+#15 {main}
+REQUEST_URI=/parcc/parcc/index.php?r=site/waiterkirim&jsonObj%5B0%5D%5Bidb%5D=5&jsonObj%5B0%5D%5Bjml%5D=1&jsonObj%5B0%5D%5Bcetak%5D=0&jsonObj%5B0%5D%5Bpermintaan%5D=&jsonObj%5B1%5D%5Bidb%5D=4&jsonObj%5B1%5D%5Bjml%5D=1&jsonObj%5B1%5D%5Bcetak%5D=0&jsonObj%5B1%5D%5Bpermintaan%5D=&head%5Bmeja%5D=1&namapel=&namapeg=
+HTTP_REFERER=http://localhost/parcc/parcc/index.php?r=site/waiter
+---
+2018/11/24 18:53:32 [error] [exception.CException] CException: Property "SalesItems.author_add" is not defined. in E:\xampp\htdocs\parcc\parcc\framework\base\CComponent.php:174
+Stack trace:
+#0 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(160): CComponent->__set('author_add', 'try')
+#1 E:\xampp\htdocs\parcc\parcc\protected\controllers\SiteController.php(646): CActiveRecord->__set('author_add', 'try')
+#2 E:\xampp\htdocs\parcc\parcc\framework\web\actions\CInlineAction.php(50): SiteController->actionWaiterkirim()
+#3 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#4 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#6 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#7 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(292): CFilterChain->run()
+#10 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(276): CController->run('waiterkirim')
+#12 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(135): CWebApplication->runController('site/waiterkiri...')
+#13 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#14 E:\xampp\htdocs\parcc\parcc\index.php(14): CApplication->run()
+#15 {main}
+REQUEST_URI=/parcc/parcc/index.php?r=site/waiterkirim&jsonObj%5B0%5D%5Bidb%5D=5&jsonObj%5B0%5D%5Bjml%5D=1&jsonObj%5B0%5D%5Bcetak%5D=0&jsonObj%5B0%5D%5Bpermintaan%5D=&jsonObj%5B1%5D%5Bidb%5D=4&jsonObj%5B1%5D%5Bjml%5D=1&jsonObj%5B1%5D%5Bcetak%5D=0&jsonObj%5B1%5D%5Bpermintaan%5D=&head%5Bmeja%5D=1&namapel=&namapeg=
+---
+2018/11/24 18:54:40 [error] [exception.CException] CException: Property "SalesItems.datetime_add" is not defined. in E:\xampp\htdocs\parcc\parcc\framework\base\CComponent.php:174
+Stack trace:
+#0 E:\xampp\htdocs\parcc\parcc\framework\db\ar\CActiveRecord.php(160): CComponent->__set('datetime_add', '2018-11-24 18:5...')
+#1 E:\xampp\htdocs\parcc\parcc\protected\controllers\SiteController.php(647): CActiveRecord->__set('datetime_add', '2018-11-24 18:5...')
+#2 E:\xampp\htdocs\parcc\parcc\framework\web\actions\CInlineAction.php(50): SiteController->actionWaiterkirim()
+#3 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#4 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#6 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#7 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 E:\xampp\htdocs\parcc\parcc\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(292): CFilterChain->run()
+#10 E:\xampp\htdocs\parcc\parcc\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(276): CController->run('waiterkirim')
+#12 E:\xampp\htdocs\parcc\parcc\framework\web\CWebApplication.php(135): CWebApplication->runController('site/waiterkiri...')
+#13 E:\xampp\htdocs\parcc\parcc\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#14 E:\xampp\htdocs\parcc\parcc\index.php(14): CApplication->run()
+#15 {main}
+REQUEST_URI=/parcc/parcc/index.php?r=site/waiterkirim&jsonObj%5B0%5D%5Bidb%5D=5&jsonObj%5B0%5D%5Bjml%5D=1&jsonObj%5B0%5D%5Bcetak%5D=0&jsonObj%5B0%5D%5Bpermintaan%5D=&jsonObj%5B1%5D%5Bidb%5D=4&jsonObj%5B1%5D%5Bjml%5D=1&jsonObj%5B1%5D%5Bcetak%5D=0&jsonObj%5B1%5D%5Bpermintaan%5D=&head%5Bmeja%5D=1&namapel=&namapeg=
+---
