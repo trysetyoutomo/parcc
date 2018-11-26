@@ -124,6 +124,12 @@
 		/*margin-left:30px;*/
 		width: 300px;
 	}
+	.cari-menu-salon{
+		padding: 10px;
+		border-radius:10px;
+		/*margin-left:30px;*/
+		width: 300px;
+	}
 	.judul{
 		color: white;
 		text-align: center;	

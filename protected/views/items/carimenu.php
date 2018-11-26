@@ -2,7 +2,7 @@
 	<?php
 	foreach (Items::model()->findAll("  item_name like '%$query%' and hapus = 0 ") as $i):
 	 ?>
-	<div class="wrap-menu">
+	<div class="wrap-menu" value="<?php echo $i->id ?>">
 	<center>
 		<img class="menu" src="<?php echo Yii::app()->request->baseUrl; ?>/menu/1.jpg">
 	</center>

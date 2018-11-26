@@ -34,7 +34,7 @@ class SalesController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('uvoid','lappajak','CetakReportAll','artimeja','periode','periodereport','periodereportexport','getmenu','getsaleid2','getharga','datahutang','hutang','del','delete','hapusmeja','grafik','printbagihasil','salescashweekly','salesweekly','salesoutletweekly','index', 'view', 'bayar', 'load', 'void','Getsaleid','hanyacetak','cashreport','CetakReport','Pindahmeja','sessid','Uservoid','Cetakrekap','Export','Salesmonthly','Outletreport','Salesoutletmonthly','Salescashmonthly','detailitems','ex','printData','bestseller','reportbestseller','reportbestsellerexport','pengunjung','periodepengungjung','bsgrafik','reportbsgrafik','reportbsgrafikexport','penggrafik','penggrafikreport'),
+                'actions' => array('uvoid','lappajak','CetakReportAll','artimeja','periode','periodereport','periodereportexport','getmenu','getsaleid2','getharga','datahutang','hutang','del','delete','hapusmeja','grafik','printbagihasil','salescashweekly','salesweekly','salesoutletweekly','index','indexsalon', 'view', 'bayar', 'load', 'void','Getsaleid','hanyacetak','cashreport','CetakReport','Pindahmeja','sessid','Uservoid','Cetakrekap','Export','Salesmonthly','Salesmonthlysalon','Outletreport','Salesoutletmonthly','Salescashmonthly','Salescashmonthlysalon','detailitems','ex','printData','bestseller','reportbestseller','reportbestsellerexport','pengunjung','periodepengungjung','bsgrafik','reportbsgrafik','reportbsgrafikexport','penggrafik','penggrafikreport'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -1420,8 +1420,43 @@ public function actionCetakReportAll(){
 							// 'pageSize'=>100,
 						// ),
 		//));
+			
+			$this->render('monthlysum',array(
+				'model'=>$model,
+				'tot'=>$tot,
+				'month'=>$month,
+				'year'=>$year,
+			));
+		
+		
+	}
+	
+	public function actionSalesmonthlysalon(){
+	
+		if ($_POST['month']){
+			$month = $_POST['month'];
+			$year = $_POST['year'];
+		}else{
+			$month = intval(Date('m'));
+			$year = intval(Date('Y'));
+		}
+		// exit;
+		// $month = Date('m');
+		$model = new sales;
+		
+		
+		$cabang = Yii::app()->user->id;
+		$user = Users::model()->find('username=:un',array(':un'=>$cabang));
+		$cabang_id = $user->branch_id;
+		// sales bulanan
+		// select s.bayar,s.table,inserter, s.id,sum(si.quantity_purchased) as total_items, date,sum(si.item_price*si.quantity_purchased) sale_sub_total,s.sale_tax,s.sale_service, s.sale_discount, 
+			// sum(((si.item_price*si.quantity_purchased)+(si.item_tax)-(si.item_discount*(si.item_price*si.quantity_purchased)/100)))  sale_total_cost,
+			 // u.username inserter 
+			 // from sales s,sales_items si , users u 
+			 // where s.id = si.sale_id and date(s.date)='$date' and s.status=1 and inserter = u.id  and inserter = $user->id   group by s.id  ";
+		$subtotal = "si.item_price*si.quantity_purchased";
 
-			$tot_salon = Yii::app()->db->createCommand()
+		$tot = Yii::app()->db->createCommand()
 			->select("
 				date(date) tgl,
 				sum(si.item_price*si.quantity_purchased) sst,
@@ -1455,11 +1490,9 @@ public function actionCetakReportAll(){
 						// ),
 		//));
 			
-			
-			$this->render('monthlysum',array(
+			$this->render('monthlysumsalon',array(
 				'model'=>$model,
 				'tot'=>$tot,
-				'tot_salon'=>$tot_salon,
 				'month'=>$month,
 				'year'=>$year,
 			));
@@ -2864,6 +2897,42 @@ public function actionSalesoutletweekly(){
 		
 		
 	}
+	 public function actionSalescashmonthlysalon(){
+	
+		if ($_POST['month']){
+			$month = $_POST['month'];
+			$year = $_POST['year'];
+		}else{
+			$month = intval(Date('m'));
+			$year = intval(Date('Y'));
+		}
+		// exit;
+		// $month = Date('m');
+		$model = new sales;
+		
+		
+		$cabang = Yii::app()->user->id;
+		$user = Users::model()->find('username=:un',array(':un'=>$cabang));
+		$cabang_id = $user->branch_id;
+		//(SUM(cash)+SUM(edc_bca)+SUM(compliment)+SUM(edc_niaga)+SUM(voucher)+SUM(dll)) grandtotal,
+		$tot = Yii::app()->db->createCommand()
+			->select('date(s.date) tanggal,s.id,s.date,sum(cash)cash,sum(edc_bca)edc_bca,sum(edc_niaga)edc_niaga,sum(compliment)compliment,sum(dll)dll,sum(voucher)voucher, SUM(IFNULL(cash,0)+IFNULL(edc_bca,0)+IFNULL(edc_niaga,0)+IFNULL(compliment,0)+IFNULL(dll,0)+IFNULL(voucher,0)) grandtotal	')
+			->from('sales s,sales_payment ')
+			->where("month(date) =  '$month' and year(date)='$year' and status=1 and sales_payment.id = s.id and s.`table` between 81 and 90")
+			->group('day(s.date)')
+			->queryAll();
+			
+
+			
+			$this->render('monthlycashsumsalon',array(
+				'model'=>$model,
+				'tot'=>$tot,
+				'month'=>$month,
+				'year'=>$year,
+			));
+		
+		
+	}
 
 	 public function actionSalescashweekly(){
 		$tgl = $_GET['Sales']['date'];
@@ -3279,6 +3348,97 @@ public function actionSalesoutletweekly(){
         $model = new Sales;
         // $dataProvider = $data->search();
         $this->render('index', array(
+            'dataProvider' => $dataProvider,
+            // 'summary' => $summary,
+			'tgl' => $date,
+			'tgl2' => $date2,
+			'jnspembayrn' => $jnspembayrn,
+			// 'model'=>$model,
+        ));
+    }
+
+    public function actionIndexsalon() {
+        
+        if (isset($_GET['Sales']['date'])) {
+			$date =  $_GET['Sales']['date'];
+			$date2 =  $_GET['Sales']['date2'];
+			$jnspembayrn =  $_GET['kategori'];
+			
+			if ($jnspembayrn == "complmnt") {
+				$jnspembayrn = "and sp.compliment > 0 and s.`table` between 81 and 90";
+			}elseif ($jnspembayrn == "tnpacomplmnt") {
+				$jnspembayrn = "and sp.compliment = 0 and s.`table` between 81 and 90";
+			}else {
+				$jnspembayrn = " and s.`table` between 81 and 90";
+			}
+        }
+		else{
+
+			$date =  date('Y-m-d');
+			$date2 =  date('Y-m-d');
+			$jnspembayrn = "and sp.compliment = 0 and s.`table` between 81 and 90"; // pendapatan
+		}
+			
+			//echo $_GET['Sales']['date'];
+			//get yii user
+			
+			
+			// $subtotal = "si.item_price*si.quantity_purchased" ; 
+			// $sale_service = "si.item_service" ; 
+			// $angka_diskon = "( si.item_discount/100 * ($subtotal) )";
+			// $sql  = "select s.bayar,s.table,inserter, s.comment comment, 
+			// s.id,sum(si.quantity_purchased) as total_items, 
+			// date,
+			// s.waiter waiter,
+
+			// sum($subtotal) sale_sub_total,
+			
+			// sum(($subtotal-$angka_diskon) * 0.05) sale_service,
+			// # sum($sale_service) sale_service,
+			// sum(($subtotal-$angka_diskon) * 0.1) sale_tax,
+			// # sum(si.item_tax) sale_tax,
+			// sum( si.item_discount/100 * ($subtotal) )  sale_discount,
+			
+			// sum((
+
+			// 	($subtotal-$angka_diskon)   + (($subtotal-$angka_diskon) * 0.1)  + (($subtotal-$angka_diskon) * 0.05)  
+			// 	))  
+			// sale_total_cost,
+
+			//  u.username inserter 
+			//  from sales s,sales_items si , users u , items i
+			//  where 
+			  
+			//   i.id = si.item_id  and
+			  
+			//  s.id = si.sale_id and date(s.date)>='$date' and date(s.date)<='$date2'  and s.status=1 and inserter = u.id  $filter   group by s.id  ";
+
+
+		
+
+
+
+
+			$dataProvider = new CSqlDataProvider($this->getOmset($date,$date2,$jnspembayrn), array(
+				'totalItemCount'=>$count,
+				'sort'=>array(
+				'attributes'=>array(
+				'desc'=>array('s.id'),
+				),
+				),
+				'pagination'=>array(
+				'pageSize'=>100000,
+			),
+			));
+			
+		// $tgl = $_GET['Sales']['date'];
+		// if(empty($_GET['Sales']['date'])){
+		// 	$tgl = date('Y-m-d');
+		// }
+		
+        $model = new Sales;
+        // $dataProvider = $data->search();
+        $this->render('indexsalon', array(
             'dataProvider' => $dataProvider,
             // 'summary' => $summary,
 			'tgl' => $date,

@@ -65,7 +65,7 @@ return array(
         // uncomment the following to use a MySQL database
 
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=parcc',
+            'connectionString' => 'mysql:host=localhost;dbname=voila',
             'emulatePrepare' => true,
             'username' => 'root',
             // 'password' => 'Passw0rD',

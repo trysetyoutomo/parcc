@@ -185,7 +185,7 @@
 		// foreach (Items::model()->findAll("hapus = 0") as $i):
 		foreach ($valsqlitemsal as $i):
 		 ?>
-		<div class="wrap-menu">
+		<div class="wrap-menu" value="<?php echo $i[id] ?>">
 			<center>
 				<img class="menu" src="<?php echo Yii::app()->request->baseUrl; ?>/menu/2.png">
 			</center>
@@ -217,8 +217,8 @@
 		<!-- <input  type="button" onclick="cetakbardapur()" class="btn" status="cetak" value="CETAK" > -->
 		<h1 class="judul">	</h1>
 		<div class="form">
-			<input type="text" class="cari-menu" placeholder="cari menu" >
-			<input  type="button" value="cari" class="btn btn-cari-menu">
+			<input type="text" class="cari-menu-salon" placeholder="cari menu" >
+			<input  type="button" value="cari" class="btn btn-cari-menu-salon">
 		</div>
 		<div class="form" id="aaaaa">
 			<label>

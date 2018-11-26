@@ -28,7 +28,7 @@ class ItemsController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('cari','barcode','index','view','check','delete'),
+				'actions'=>array('cari','barcode','index','view','check','delete','carisalon'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -54,6 +54,13 @@ class ItemsController extends Controller
 	public function actionCari($query){
 
 		$this->renderPartial('carimenu',
+			array(
+				'query'=>$query
+			));
+	}
+	public function actionCarisalon($query){
+
+		$this->renderPartial('carimenusalon',
 			array(
 				'query'=>$query
 			));
@@ -287,7 +294,11 @@ class ItemsController extends Controller
 
 		if(isset($_POST['Items']))
 		{
+			// echo "<pre>";
+			// print_r($_POST['Items']);
+			// exit();
 			$model->attributes=$_POST['Items'];
+			$model->lokasi=$_POST['Items']['lokasi'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

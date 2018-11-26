@@ -57,7 +57,7 @@ class Items extends CActiveRecord
 			array('unit_price', 'compare','operator'=>'>=','compareAttribute'=>'min','message'=>'{attribute} minimal 500'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, item_name, item_number, description, category_id, unit_price, tax_percent, total_cost, discount, image, status', 'safe', 'on'=>'search'),
+			array('id, item_name, item_number, description, category_id, unit_price, tax_percent, total_cost, discount, image, status, lokasi', 'safe', 'on'=>'search'),
 		);
 	}
 	

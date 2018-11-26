@@ -211,6 +211,17 @@
                     ), 
                   ),
 
+                array('label'=>'Laporan Salon', 'visible' => $userlevel==3 || $userlevel==2  || $userlevel==1|| $userlevel==4,
+                  'items'=>array( 
+                    array('label'=>'Penjualan Periode', 'url'=>array('/sales/indexsalon')), 
+                    array('label'=>'Penjualan', 'url'=>array('/sales/salesmonthlysalon')), 
+                    array('label'=>'Pembayaran', 'url'=>array('/sales/salescashmonthlysalon','view'=>'sub1')), 
+                    // array('label'=>'Outlet & Tenant','url'=>array('/sales/salesoutletmonthly')), 
+                    // array('label'=>'Penjualan Paket','url'=>array('/sales/salesoutletweekly')), 
+
+                    ), 
+                  ),
+
                 // array('label'=>'Grafik','url'=>array('/sales/grafik'), 'visible' => !Yii::app()->user->isGuest,),
                   
                   array('label'=>'Data Master', 'visible' =>$userlevel==3 || $userlevel==2 ,

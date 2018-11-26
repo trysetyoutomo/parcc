@@ -562,10 +562,76 @@
 				}
 			});
 		});
+		$(document).on("click",".btn-cari-menu-salon",function(e){
+			var val = $('.cari-menu-salon').val();
+			$.ajax({
+				url : "<?php echo Yii::app()->createUrl('items/carisalon'); ?>",
+				data : "query="+val,
+				success:function(data){
+					// alert(data);
+					$('#isimenu2').html(data);
+				}
+			});
+		});
 
 
+			// var no = 1;
+			// $(document).on("click",".add",function(e){
+			// 	var id = $(this).attr("value");
+			// 	 $.ajax({
+		 //        url : 'index.php?r=items/check',
+		 //        data : 'id='+id,
+		 //        success : function(data)
+		 //        {
+	  //       	var obj = jQuery.parseJSON(data);
+	  //           var stok = 1;
+			// 	var count = $('.pk[nilai="'+id+'"][cetak="0"]').length;
+			// 	// var count_printed = $('.pk[cetak="1"]').length;
+			// 	// alert(count);
+			// 	if (count==0){
+			// 		// alert(obj.item_name);
+			// 		$('#items tbody').append(
+			// 			"<tr class='baris'>" +
+			// 			"<td style='display:none' cetak='0' class='pk' nilai="+id+" lokasi="+obj.lokasi+"  >" + id + "</td>" +
+			// 			"<td style='display:none'>" + no + "</td>" +
+			// 			"<td class='nama_menu'>" + obj.item_name + "</td>" +
+			// 			"<td class='jumlah'><input min='1' maxlength='2' style='width:40px' class='input-jumlah' type='number' value='" + stok + "'></td>" +
+			// 			"<td class='permintaan'><textarea  class='area-permintaan'></textarea>"+
+			// 			"<td class='cetak'>belum</td>"+
+			// 			"<td style='text-align:center' class='hapus' ><p >X</p></td>"+
+			// 			"</td>" +
+
+			// 			"</tr>"
+			// 		);
+			// 			//"<td style='text-align:center' class='spoile' ><p >X</p></td>"+
+			// 		no++;
+			// 	    $('#container-tabel').animate({
+			//           scrollTop: 10000
+			//         }, 1000);
+			// 	}
+			// 	else{
+			// 		// alert('masuk');
+
+			// 		var now = $('.pk[nilai="'+id+'"][cetak="0"]').closest('.baris').find('.jumlah').find('.input-jumlah').val();
+			// 		$('.pk[nilai="'+id+'"][cetak="0"]').closest('.baris').find('.jumlah').find('.input-jumlah').val(parseInt(now)+parseInt(stok));
+			// 	}
+			
+		            
+			//         },
+			//         error : function(data)
+			//         {
+			//         //alert(data);
+			                
+			//         }
+			//     });
+
+				
+				
+			// });
+
+			
 			var no = 1;
-			$(document).on("click",".add",function(e){
+			$(document).on("click",".wrap-menu",function(e){
 				var id = $(this).attr("value");
 				 $.ajax({
 		        url : 'index.php?r=items/check',
