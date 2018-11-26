@@ -1,0 +1,6 @@
+Scc [2018-11-22 00:38:20 / SalesController(1896)(actionLoad)]: [chieka | kasir load bill 14330]
+Scc [2018-11-22 00:39:44 / SalesController(1896)(actionLoad)]: [chieka | kasir load bill 14330 ipnya 127.0.0.1]
+Scc [2018-11-22 00:42:35 / SalesController(1896)(actionLoad)]: [chieka | kasir load bill 14330 ipnya 127.0.0.1]
+Scc [2018-11-22 00:44:02 / SalesController(1896)(actionLoad)]: [chieka (127.0.0.1) | kasir load bill 14330]
+Scc [2018-11-22 23:22:57 / SalesController(1896)(actionLoad)]: [chieka (127.0.0.1) | kasir load bill 14330]
+Scc [2018-11-22 23:23:30 / SalesController(1896)(actionLoad)]: [chieka (127.0.0.1) | kasir load bill 14330]

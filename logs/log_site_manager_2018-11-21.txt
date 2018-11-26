@@ -1,0 +1,2 @@
+Scc [2018-11-21 23:57:41 / SiteController(766)(actionUservoid)]: [manager | delete item 194228]
+Scc [2018-11-21 23:59:42 / SiteController(766)(actionUservoid)]: [manager | delete item 194229 ipnya 127.0.0.1]
