@@ -293,7 +293,6 @@ try{
 
 function print_items(lokasi,lokindex) {
 
-
 	<?php 
 	date_default_timezone_set("Asia/Jakarta"); 
 	?>
@@ -305,13 +304,12 @@ function print_items(lokasi,lokindex) {
 	try { 
 	var applet = document.jzebra;
 	applet.findPrinter(lokasi);
-	var lokasi = ["BAR","KITCHEN","SALON"];
 
-	// if (lokasi == "POS-80C"){
-	// 	lokasi = "BAR";
-	// }else{
-	// 	lokasi = "KITCHEN";
-	// }
+	if (lokasi == "POS-80C"){
+		lokasi = "BAR";
+	}else{
+		lokasi = "KITCHEN";
+	}
  	var data_detail = [];
     var inc = 0;
 	var namapel = $('#namapel').val();
@@ -341,7 +339,7 @@ function print_items(lokasi,lokindex) {
 	});	
 				if (data_detail.length>0){
 				applet.append(chr(27) + chr(33) + chr(128));//underliner
-				applet.append("\n PERMINTAAN KEPADA : "+lokasi[lokindex]+"\r\n");
+				applet.append("\n PERMINTAAN KEPADA : "+lokasi+"\r\n");
 				applet.append("\n MEJA : "+meja_cetak+"\r\n");
 				applet.append(chr(27) + chr(64));//cancel character sets			
 				applet.append(chr(27) + chr(64));//cancel character sets
@@ -1113,7 +1111,7 @@ function cetakbardapur(meja,meja_tipe){
 	// alert(meja_tipe);
 	meja_cetak = meja;
 	meja_tipe_cetak = meja_tipe;
-	if (confirm('Aplikasi akan mengirimkan permintaan ke lokasi menu ?')){
+	if (confirm('Aplikasi akan mengirimkan permintaan ke bar dan dapur ?')){
 		
 		// alert(meja_tipe_cetak);
 		// alert(meja_tipe);
@@ -1145,42 +1143,24 @@ function cetakbardapur(meja,meja_tipe){
 		     	if (lokasi=="2"){
 		     		dapur = true;
 		     	}
-		     	// added by Try , 24 11 2018
-		     	if (lokasi=="3"){
-		     		salon = true;
-		     	}
-
 	     	}
 
 		});
+	 //    if (dapur==true){		
+		// 	 if (print_items("POS-80C dapur",2)){
+		// 		 alert('PERMINTAAN TELAH TERKIRIM KE DAPUR');				// alert('dapur true');
+		// 		 // return true;
+		// 	 }
+		// }
 
-		// alert(dapur);
-		// alert(bar);
-		// alert(salon);
-	    
-	    if (dapur==true){		
-			 if (print_items("POS-80C dapur",2)){
-				 alert('PERMINTAAN TELAH TERKIRIM KE DAPUR');				// alert('dapur true');
-				 return true;
-			 }
-		}
+	 //    if (bar==true){		
+		// 	if (print_items("POS-80C",1)){
+		// 	    alert('PERMINTAAN TELAH TERKIRIM KE BAR');
+		// 	    // return true;
+		// 	}
+	 //    }
 
-	    if (bar==true){		
-			if (print_items("POS-80C",1)){
-			    alert('PERMINTAAN TELAH TERKIRIM KE BAR');
-			    return true;
-			}
-	    }
-
-	 	// added by Try , 24 11 2018
-	    if (salon==true){		
-			if (print_items("POS-80C",3)){
-			    alert('PERMINTAAN TELAH TERKIRIM KE SALON');
-			    return true;
-			}
-	    }
-
-	    // return true;
+	    return true;
     }else{
     	return false;
     }

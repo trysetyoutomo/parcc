@@ -127,20 +127,19 @@ public function actionCetakReportAll(){
 			$date2 =  $_GET['Sales']['date2'];
         }
 		else{
-
 			$date =  date('Y-m-d');
 			$date2 =  date('Y-m-d');
 		}
-			$dataProvider = new CSqlDataProvider($this->getuvoid(), array(
+			$dataProvider = new CSqlDataProvider($this->getuvoid($date,$date2), array(
 				'totalItemCount'=>$count,
 				'sort'=>array(
-				'attributes'=>array(
-				'desc'=>array('s.id'),
-				),
+					'attributes'=>array(
+						'desc'=>array('s.id'),
+					),
 				),
 				'pagination'=>array(
-				'pageSize'=>100000,
-			),
+					'pageSize'=>100000,
+				),
 			));
         $model = new Sales;
         $this->render('uservoid', array(
@@ -150,8 +149,8 @@ public function actionCetakReportAll(){
         ));
     }
 
-    public function getuvoid(){
-    	$sqluvoid = "SELECT * FROM log_aktivitas WHERE action = 'hmppos'";//OR action = 'uservoid'
+    public function getuvoid($date1,$date2){
+    	$sqluvoid = "SELECT * FROM log_aktivitas WHERE action = 'hmppos' AND tanggal_akses BETWEEN '{$date1}' AND '{$date2}'";//OR action = 'uservoid'
     	return $sqluvoid;
     }
 	
@@ -545,7 +544,7 @@ public function actionCetakReportAll(){
 				where i.id = si.item_id
 				and s.id = si.sale_id
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 				group by i.item_name, si.item_price
 				order by jumlah desc
 			";
@@ -555,7 +554,7 @@ public function actionCetakReportAll(){
 				where i.id = si.item_id
 				and s.id = si.sale_id
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 			";
 		}
 		else if($kategori=="makanan"){
@@ -566,7 +565,7 @@ public function actionCetakReportAll(){
 				and s.id = si.sale_id
 				and i.category_id = 2
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 				group by i.item_name, si.item_price
 				order by jumlah desc
 			";
@@ -577,7 +576,7 @@ public function actionCetakReportAll(){
 				and s.id = si.sale_id
 				and i.category_id = 2
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 			";
 		}
 		else if($kategori=="minuman"){
@@ -588,7 +587,7 @@ public function actionCetakReportAll(){
 				and s.id = si.sale_id
 				and i.category_id = 1
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 				group by i.item_name, si.item_price
 				order by jumlah desc
 			";
@@ -599,7 +598,7 @@ public function actionCetakReportAll(){
 				and s.id = si.sale_id
 				and i.category_id = 1
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 			";
 		}
 		else if($kategori=="detail"){
@@ -609,7 +608,7 @@ public function actionCetakReportAll(){
 				where i.id = si.item_id
 				and s.id = si.sale_id
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 				order by i.item_name asc
 			";
 			$tot = "
@@ -618,7 +617,7 @@ public function actionCetakReportAll(){
 				where i.id = si.item_id
 				and s.id = si.sale_id
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 			";
 		}
 		else if($kategori=="dema"){
@@ -629,7 +628,7 @@ public function actionCetakReportAll(){
 				and s.id = si.sale_id
 				and i.category_id = 2
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 				order by i.item_name asc
 			";
 			$tot = "
@@ -639,7 +638,7 @@ public function actionCetakReportAll(){
 				and s.id = si.sale_id
 				and i.category_id = 2
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 			";
 		}
 		else if($kategori=="demi"){
@@ -650,7 +649,7 @@ public function actionCetakReportAll(){
 				and s.id = si.sale_id
 				and i.category_id = 1
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 				order by i.item_name asc
 			";
 			$tot = "
@@ -660,7 +659,7 @@ public function actionCetakReportAll(){
 				and s.id = si.sale_id
 				and i.category_id = 1
 				and s.date between '$tal' and '$tak'
-				and s.status = '1'
+				and s.status = '1' and s.`table` between 1 and 80
 			";
 		}
 		$sqlv = Yii::app()->db->createCommand($sql)->queryAll();
@@ -849,6 +848,12 @@ public function actionCetakReportAll(){
 			}elseif ($kategori == "tnpacomplmnt") {
 				$kategori = "and sp.compliment = 0";
 			}
+			$detail = $_POST['detail'];
+			if ($detail == "parcc") {
+				$detail = "and s.`table` between 1 and 80";
+			}elseif ($detail == "salon") {
+				$detail = "and s.`table` between 81 and 90";
+			}
 			$tal = $tanggalawal.' 00:00:01';
 			$tak = $tanggalakhir.' 23:59:59';
 			$sql = "
@@ -858,6 +863,7 @@ public function actionCetakReportAll(){
 			and sp.id = s.id
 			and date between '$tal' and '$tak'
 			and status = '1'
+			$detail
 			$kategori
 			GROUP BY s.id
 			";
@@ -892,6 +898,12 @@ public function actionCetakReportAll(){
 				}elseif ($kategori == "tnpacomplmnt") {
 					$kategori = "and sp.compliment = 0";
 				}
+				$detail = $_POST['detail'];
+				if ($detail == "parcc") {
+					$detail = "and s.`table` between 1 and 80";
+				}elseif ($detail == "salon") {
+					$detail = "and s.`table` between 81 and 90";
+				}
 				$tal = $tanggalawal.' 00:00:01';
 				$tak = $tanggalakhir.' 23:59:59';
 				$sql = "
@@ -901,6 +913,7 @@ public function actionCetakReportAll(){
 				and sp.id = s.id
 				and date between '$tal' and '$tak'
 				and status = '1'
+				$detail
 				$kategori
 				GROUP BY s.id
 				";
@@ -1410,7 +1423,7 @@ public function actionCetakReportAll(){
 
 					")
 			->from("sales s, sales_items si,items i")
-			->where(" i.id = si.item_id and month(date) =  '$month' and year(date)='$year'  and s.status=1  and s.id = si.sale_id")
+			->where(" i.id = si.item_id and month(date) =  '$month' and year(date)='$year'  and s.status=1  and s.id = si.sale_id and s.`table` between 1 and 80")
 			->group('date(s.date)')
 			->order('date(s.date) asc')
 			->queryAll();
@@ -1973,13 +1986,20 @@ public function actionSalesoutletweekly(){
 		$_SESSION['sale_id'] = "";		
 		unset($_SESSION['sale_id']);
 	}
-	private function SetNumberFaktur(){
-		$sql = "SELECT count(*) qty FROM sales s WHERE MONTH(DATE)=MONTH(NOW()) AND YEAR(DATE) = YEAR(NOW()) and s.status = 1";
-		$count = Yii::app()->db->createCommand($sql)->queryRow();
-		$count = $count['qty'] + 1;
-		$count = str_pad($count,4,'0',STR_PAD_LEFT);
-
-		$unique = date("y").date("m").$count;
+	private function SetNumberFaktur($table){
+		if ($table >= 1 && $table <= 80) {
+			$sql = "SELECT count(*) qty FROM sales s WHERE MONTH(DATE)=MONTH(NOW()) AND YEAR(DATE) = YEAR(NOW()) and s.status = 1 and s.`table` between 1 and 80";
+			$count = Yii::app()->db->createCommand($sql)->queryRow();
+			$count = $count['qty'] + 1;
+			$count = str_pad($count,4,'0',STR_PAD_LEFT);
+			$unique = date("y").date("m").$count;
+		}else{
+			$sql = "SELECT count(*) qty FROM sales s WHERE MONTH(DATE)=MONTH(NOW()) AND YEAR(DATE) = YEAR(NOW()) and s.status = 1 and s.`table` between 81 and 90";
+			$count = Yii::app()->db->createCommand($sql)->queryRow();
+			$count = $count['qty'] + 1;
+			$count = str_pad($count,4,'0',STR_PAD_LEFT);
+			$unique = "V".date("y").date("m").$count;
+		}
 		return $unique;
 	}
     public function actionBayar() {
@@ -2045,7 +2065,7 @@ public function actionSalesoutletweekly(){
 
             // Yii::import('application.controllers.SiteController');
             if ($sales->status==1){
-            	$sales->fid = $this->SetNumberFaktur();
+            	$sales->fid = $this->SetNumberFaktur($data['table']);
             }
 			
             $hit=0;
@@ -2882,7 +2902,7 @@ public function actionSalesoutletweekly(){
 		$tot = Yii::app()->db->createCommand()
 			->select('date(s.date) tanggal,s.id,s.date,sum(cash)cash,sum(edc_bca)edc_bca,sum(edc_niaga)edc_niaga,sum(compliment)compliment,sum(dll)dll,sum(voucher)voucher, SUM(IFNULL(cash,0)+IFNULL(edc_bca,0)+IFNULL(edc_niaga,0)+IFNULL(compliment,0)+IFNULL(dll,0)+IFNULL(voucher,0)) grandtotal	')
 			->from('sales s,sales_payment ')
-			->where("month(date) =  '$month' and year(date)='$year' and status=1 and sales_payment.id = s.id")
+			->where("month(date) =  '$month' and year(date)='$year' and status=1 and sales_payment.id = s.id and s.`table` between 1 and 80")
 			->group('day(s.date)')
 			->queryAll();
 			
@@ -2996,28 +3016,28 @@ public function actionSalesoutletweekly(){
 			$row = Yii::app()->db->createCommand()
 					->select('s.id,s.date,cash,edc_bca,edc_niaga,compliment,dll,voucher , SUM(cash+edc_bca+edc_niaga+compliment+dll+voucher) total')
 					->from('sales s,sales_payment ')
-					->where("date(s.date)>='$date' and date(s.date)<='$date2'  and s.status=1 and s.id = sales_payment.id")
+					->where("date(s.date)>='$date' and date(s.date)<='$date2'  and s.status=1 and s.id = sales_payment.id and s.`table` between 1 and 80")
 					->group('s.id')
 					->queryAll();
 					
 			$summary = Yii::app()->db->createCommand()
 					->select('(SUM(cash)+SUM(edc_bca)+SUM(compliment)+SUM(edc_niaga)+SUM(voucher)+SUM(dll)) grandtotal,SUM(cash) totalcash,SUM(voucher) totalvou,SUM(compliment) totalcomp,SUM(edc_bca) totalbca,SUM(edc_niaga) totalniaga ,sum(dll) totaldll')
 					->from('sales,sales_payment')
-					->where("sales.id = sales_payment.id and date(sales.date)>='$date' and date(sales.date)<='$date2' and status=1")
+					->where("sales.id = sales_payment.id and date(sales.date)>='$date' and date(sales.date)<='$date2' and status=1 and sales.`table` between 1 and 80")
 					->queryRow();
 			}
 			else{
 			$row = Yii::app()->db->createCommand()
 					->select('s.id,s.date,cash,edc_bca,edc_niaga,compliment,dll,voucher , SUM(cash+edc_bca+edc_niaga+compliment+dll+voucher) total')
 					->from('sales s,sales_payment ')
-					->where("date(s.date)>='$date' and date(s.date)<='$date2' and s.inserter=:i and  s.status=1 and s.id = sales_payment.id", array(':i'=> $user->id))
+					->where("date(s.date)>='$date' and date(s.date)<='$date2' and s.`table` between 1 and 80 and s.inserter=:i and  s.status=1 and s.id = sales_payment.id", array(':i'=> $user->id))
 					->group('s.id')
 					->queryAll();
 					
 			$summary = Yii::app()->db->createCommand()
 					->select('(SUM(cash)+SUM(edc_bca)+SUM(compliment)+SUM(edc_niaga)+SUM(voucher)+SUM(dll)) grandtotal,SUM(cash) totalcash,SUM(voucher) totalvou,SUM(compliment) totalcomp,SUM(edc_bca) totalbca,SUM(edc_niaga) totalniaga ,sum(dll) totaldll')
 					->from('sales ,sales_payment')
-					->where("sales.id = sales_payment.id and date(sales.date)>='$date' and date(sales.date)<='$date2' and status=1 and inserter=:i", array(':i'=> $user->id))
+					->where("sales.id = sales_payment.id  and sales.`table` between 1 and 80 and date(sales.date)>='$date' and date(sales.date)<='$date2' and status=1 and inserter=:i", array(':i'=> $user->id))
 					->queryRow();
 			}
 			
@@ -3274,9 +3294,9 @@ public function actionSalesoutletweekly(){
 			$jnspembayrn =  $_GET['kategori'];
 			
 			if ($jnspembayrn == "complmnt") {
-				$jnspembayrn = "and sp.compliment > 0";
+				$jnspembayrn = "and sp.compliment > 0 and s.`table` between 1 and 80";
 			}elseif ($jnspembayrn == "tnpacomplmnt") {
-				$jnspembayrn = "and sp.compliment = 0";
+				$jnspembayrn = "and sp.compliment = 0 and s.`table` between 1 and 80";
 			}else {
 				$jnspembayrn = "";
 			}
@@ -3285,7 +3305,7 @@ public function actionSalesoutletweekly(){
 
 			$date =  date('Y-m-d');
 			$date2 =  date('Y-m-d');
-			$jnspembayrn = "and sp.compliment = 0"; // pendapatan
+			$jnspembayrn = "and sp.compliment = 0 and s.`table` between 1 and 80"; // pendapatan
 		}
 			
 			//echo $_GET['Sales']['date'];

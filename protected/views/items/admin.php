@@ -54,7 +54,7 @@
 			'name'=>'lokasi',
 			'header'=>'Lokasi',
 			// 'value'=>'$data->lokasi ? 1 : "dapur" : "bar"',
-			'value'=>'$data[lokasi]==2 ? \'Dapur\':\'Bar\'',
+			'value'=>'$data[lokasi]==3 ? \'Salon\': $data[lokasi]==1 ? \'Bar\': \'Dapur\'',
 
 			
 			// 'value'=>'$data->outlet->nama_outlet',

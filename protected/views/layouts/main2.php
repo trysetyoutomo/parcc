@@ -173,7 +173,7 @@
                     <li><a href="#">Items</a></li>
                     <li><a href="#">Sales</a></li>
                 </ul-->
-				<?php
+				<?
 				$userlevel = Yii::app()->user->getLevel();
 
 				// echo "hahahahaha".$userlevel;
@@ -186,32 +186,53 @@
 				 <?php $this->widget('application.extensions.mbmenu.MbMenu',array( 
             'items'=>array(
 
-                array('label'=>'Laporan ', 'visible' => $userlevel!=99, //!Yii::app()->user->isGuest
+                array('label'=>'Laporan Umum', 'visible' => $userlevel!=99, //!Yii::app()->user->isGuest
                   'items'=>array( 
-                    array('label'=>'Penjualan', 'url'=>array('/sales/index')), 
-                    array('label'=>'Penjualan 2 ', 'url'=>array('/sales/periode')), 
-                    array('label'=>'Pembayaran','url'=>array('/sales/cashreport')), 
+                    array('label'=>'Penjualan Periode Detail', 'url'=>array('/sales/periode')),
                     array('label'=>'Pengunjung','url'=>array('/sales/pengunjung')), 
-                    array('label'=>'Penjualan Terbanyak','url'=>array('/sales/bestseller')),
-					array('label'=>'Penghapusan Menu ', 'url'=>array('/sales/uvoid')),					
+                    array('label'=>'Penghapusan', 'url'=>array('/sales/uvoid')),                  
                     // array('label'=>'Outlet & Tenant','url'=>array('/sales/outletreport')), 
                     // array('label'=>'Penjualan Paket','url'=>array('/paket/index')), 
                   ), 
                 ),
 
+                // array('label'=>'Pendapatan Periode', 'visible' => $userlevel==3 || $userlevel==2  || $userlevel==1,
+                //   'items'=>array( 
+                //     array('label'=>'Penjualan', 'url'=>array('/sales/periode')), 
+                //     // array('label'=>'Pembayaran','url'=>array('/sales/cashreport')), 
+                //     // array('label'=>'Outlet & Tenant','url'=>array('/sales/outletreport')), 
+                //     // array('label'=>'Penjualan Paket','url'=>array('/paket/index')), 
+                //   ), 
+                // ),  
+                
+            //  array('label'=>'Laporan Periode','url'=>array('/sales/salesmonthly'), 'visible' => !Yii::app()->user->isGuest,
+             //   ), 
+                
+                
+                // array('label'=>'Pendapatan Mingguan', 'visible' => $userlevel==3 || $userlevel==2  || $userlevel==1 ,
+                //   'items'=>array( 
+                //     array('label'=>'Penjualan', 'url'=>array('/sales/salesweekly')), 
+                //     array('label'=>'Pembayaran', 'url'=>array('/sales/salescashweekly')), 
+                //     // array('label'=>'Outlet & Tenant','url'=>array('/sales/salesoutletweekly')), 
+                //     // array('label'=>'Penjualan Paket','url'=>array('/sales/salesoutletweekly')), 
+                //     ), 
+                //   ),
                 
                   
-                array('label'=>'Laporan Bulanan', 'visible' => $userlevel==3 || $userlevel==2  || $userlevel==1|| $userlevel==4,
+                array('label'=>'Laporan Parc C', 'visible' => $userlevel==3 || $userlevel==2  || $userlevel==1 || $userlevel==4 || $userlevel==6,
                   'items'=>array( 
-                    array('label'=>'Penjualan', 'url'=>array('/sales/salesmonthly')), 
-                    array('label'=>'Pembayaran', 'url'=>array('/sales/salescashmonthly','view'=>'sub1')), 
+                    array('label'=>'Penjualan Harian', 'url'=>array('/sales/salesmonthly')), 
+                    array('label'=>'Penjualan Periode', 'url'=>array('/sales/index')),  
+                    array('label'=>'Pembayaran Harian','url'=>array('/sales/cashreport')), 
+                    array('label'=>'Pembayaran Bulanan', 'url'=>array('/sales/salescashmonthly','view'=>'sub1')), 
+                    array('label'=>'Penjualan Terbanyak','url'=>array('/sales/bestseller')),
                     // array('label'=>'Outlet & Tenant','url'=>array('/sales/salesoutletmonthly')), 
                     // array('label'=>'Penjualan Paket','url'=>array('/sales/salesoutletweekly')), 
 
                     ), 
                   ),
 
-                array('label'=>'Laporan Salon', 'visible' => $userlevel==3 || $userlevel==2  || $userlevel==1|| $userlevel==4,
+                array('label'=>'Laporan Voila', 'visible' => $userlevel==3 || $userlevel==2  || $userlevel==1 || $userlevel==4 || $userlevel==6,
                   'items'=>array( 
                     array('label'=>'Penjualan Periode', 'url'=>array('/sales/indexsalon')), 
                     array('label'=>'Penjualan', 'url'=>array('/sales/salesmonthlysalon')), 
@@ -271,7 +292,7 @@
                  
             ), 
     )); ?> 
-	<?php
+	<?
 				/*
                 $this->widget('zii.widgets.CMenu', array(
                     'items' => array(

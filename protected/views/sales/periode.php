@@ -7,7 +7,7 @@
 <?php $form=$this->beginWidget('CActiveForm',array(
 )); ?>
 <div class="row">
-<b>Start Periode</b>
+<b>Awal Periode</b>
 <?php
 	$this->widget('zii.widgets.jui.CJuiDatePicker', array(
 		// 'name'=>'Sales[date]',
@@ -31,7 +31,7 @@
 		),
 	));
 ?>
-<b>     End Periode</b>
+<b>     Akhir Periode</b>
 <?php
 	$this->widget('zii.widgets.jui.CJuiDatePicker', array(
 		// 'name'=>'Sales[date]',
@@ -56,10 +56,19 @@
 	));
 ?>
 
-<select name="kategori" id="kategori">
+	<b>     Jenis</b>
+	<select name="kategori" id="kategori">
 		<!-- <option value="">---Pilih Pembayaran---</option> -->
 		<option value="tnpacomplmnt">Pendapatan</option>
 		<option value="complmnt">Compliment(Biaya)</option>
+		<!-- <option value="all">Semua</option> -->
+	</select>
+
+	<b>     Dari</b>
+	<select name="detail" id="detail">
+		<!-- <option value="">---Pilih Pembayaran---</option> -->
+		<option value="parcc">Parc C</option>
+		<option value="salon">Salon</option>
 		<!-- <option value="all">Semua</option> -->
 	</select>
 	</div>

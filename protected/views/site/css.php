@@ -180,7 +180,7 @@
 		padding :10px;
 		border-radius: 10px;
 		background: white;
-
+		cursor: pointer;
 	}
 	.wrap-menu .menu{
 		width: 100px;

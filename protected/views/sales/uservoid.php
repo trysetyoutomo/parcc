@@ -61,7 +61,7 @@ $this->renderPartial('application.views.site.main');
 ?>
 
 <?php $form=$this->beginWidget('CActiveForm',array(
-	'action'=>Yii::app()->createUrl('sales/index'),
+	'action'=>Yii::app()->createUrl('sales/uvoid'),
 	'method'=>'get',
 )); ?>
 <!-- <div class="row"> -->
