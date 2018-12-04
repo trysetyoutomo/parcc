@@ -1,0 +1,3 @@
+Scc [2018-12-04 11:55:44 / SiteController(607)(actionWaiterkirim)]: [caca (::1) | add 160 to 9]
+Scc [2018-12-04 05:56:19 / SalesController(1896)(actionLoad)]: [caca (::1) | kasir load bill 9]
+Scc [2018-12-04 05:57:25 / SalesController(1896)(actionLoad)]: [caca (::1) | kasir load bill 1]

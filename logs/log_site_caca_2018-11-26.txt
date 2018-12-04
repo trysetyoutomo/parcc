@@ -1,0 +1,1 @@
+Scc [2018-11-26 11:56:44 / SalesController(1896)(actionLoad)]: [caca (::1) | kasir load bill 7]

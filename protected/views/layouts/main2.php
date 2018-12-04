@@ -173,7 +173,7 @@
                     <li><a href="#">Items</a></li>
                     <li><a href="#">Sales</a></li>
                 </ul-->
-				<?
+				<?php
 				$userlevel = Yii::app()->user->getLevel();
 
 				// echo "hahahahaha".$userlevel;
@@ -292,7 +292,7 @@
                  
             ), 
     )); ?> 
-	<?
+	<?php
 				/*
                 $this->widget('zii.widgets.CMenu', array(
                     'items' => array(
